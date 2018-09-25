@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import Note from './Note.js'
 import './App.css';
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
-      output: ''
+      title: '',
+      body: '',
+      output: {title: '', body: ''}
     };
 
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -14,26 +17,32 @@ class App extends Component {
   }
 
   handleFormSubmit = () => {
-    this.setState({output: this.state.input});
+    this.setState({output: {title: this.state.title, body: this.state.body} });
   }
 
-  handleFormChange = (value) => {
-    this.setState({input: value});
+  handleFormChange = (target) => {
+    this.setState({[target.name]: target.value});
   }
 
   render() {
-    const input = this.state.input;
+    const title = this.state.title;
+    const textBody = this.state.body;
     const output = this.state.output;
 
     return (
       <div className="App">
-        <NoteForm 
-          placeholder={'Take a Note...'} 
+        <NoteForm
+          head={'Title'} 
+          body={'Take a Note...'} 
           onFormChange={this.handleFormChange}
           onFormSubmit={this.handleFormSubmit}
-          input={input}
+          title={title}
+          textBody={textBody}
         />
-        <p>{output}</p>
+        <Note
+          text={output}
+          className={'Note'}
+        />
       </div>
     );
   }
@@ -53,7 +62,7 @@ class NoteForm extends Component {
 
 
   handleChange = (event) => {
-    this.props.onFormChange(event.target.value);
+    this.props.onFormChange(event.target);
   }
   
   render() {
@@ -61,9 +70,16 @@ class NoteForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           <input type="text" 
-            placeholder={this.props.placeholder} 
-            value={this.props.input} 
+            placeholder={this.props.head} 
+            value={this.props.title} 
             onChange={this.handleChange} 
+            name="title"
+          />
+          <input type="text" 
+            placeholder={this.props.body} 
+            value={this.props.textBody} 
+            onChange={this.handleChange}
+            name="body" 
           />
         </label>
         <input type="submit" value="Submit" />
