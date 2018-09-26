@@ -7,8 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      body: '',
+      input: {title: '', body: ''},
       output: {title: '', body: ''}
     };
 
@@ -17,16 +16,19 @@ class App extends Component {
   }
 
   handleFormSubmit = () => {
-    this.setState({output: {title: this.state.title, body: this.state.body} });
+    this.setState({
+      output: { ...this.state.input } 
+    });
   }
 
   handleFormChange = (target) => {
-    this.setState({[target.name]: target.value});
+    this.setState({
+      input: { ...this.state.input, ...{[target.name]: target.value} }
+    });
   }
 
   render() {
-    const title = this.state.title;
-    const textBody = this.state.body;
+    const input = this.state.input;
     const output = this.state.output;
 
     return (
@@ -36,8 +38,7 @@ class App extends Component {
           body={'Take a Note...'} 
           onFormChange={this.handleFormChange}
           onFormSubmit={this.handleFormSubmit}
-          title={title}
-          textBody={textBody}
+          input={input}
         />
         <Note
           text={output}
@@ -71,13 +72,13 @@ class NoteForm extends Component {
         <label>
           <input type="text" 
             placeholder={this.props.head} 
-            value={this.props.title} 
+            value={this.props.input.title} 
             onChange={this.handleChange} 
             name="title"
           />
           <input type="text" 
             placeholder={this.props.body} 
-            value={this.props.textBody} 
+            value={this.props.input.body} 
             onChange={this.handleChange}
             name="body" 
           />
