@@ -7,10 +7,15 @@ class Note extends Component {
     super(props);
 
     this.handleEdit = this.handleEdit.bind(this);
-
+    this.handleDelete = this.handleDelete.bind(this);
   }
+
   	handleEdit = (event) => {
   		this.props.onNoteEdit(event.target)
+  	}
+
+  	handleDelete = (event) => {
+  		this.props.onNoteDelete(event.target.name)
   	}
 
   	render() {
@@ -19,28 +24,39 @@ class Note extends Component {
 
   			<div>
 			{
-				texts.map((text, id) => 
+				texts.map((text, index) => 
 				{
 				return (
-					<div key={id} 
+					<div key={text.id} 
 						className={'Note'}
 					>	
-  					<div>
-  						<input 
-  							className={'NoteInput'}
-  							name={[id,'title']} 
-  							value={text.title}
-  							onChange={this.handleEdit}
-						/> 
-					</div>
-  					<div><input 
-  							type="text" 
-  							className={'NoteInput'}
-  							name={[id,'body']} 
-  							value={text.body}
-  							onChange={this.handleEdit}
-  						/> 
-  					</div>
+	  					<div>
+	  						<input 
+	  							className={'NoteInput'}
+	  							name={[index,'title']} 
+	  							value={text.title}
+	  							onChange={this.handleEdit}
+							/> 
+						</div>
+
+	  					<div>
+	  						<input 
+	  							type="text" 
+	  							className={'NoteInput'}
+	  							name={[index,'body']} 
+	  							value={text.body}
+	  							onChange={this.handleEdit}
+	  						/> 
+	  					</div>
+	  					<div>
+	  						<button 
+	  							onClick={this.handleDelete}
+	  							name={text.id}
+	  						>
+	  							D
+	  						</button>
+	  					</div>
+
 					</div>
 					)
 				})

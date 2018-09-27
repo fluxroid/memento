@@ -3,6 +3,7 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 import './App.css';
 
+var id = 0;
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleNoteEdit = this.handleNoteEdit.bind(this);
+    this.handleNoteDelete = this.handleNoteDelete.bind(this);
   }
 
   handleNoteEdit = (target) => {
@@ -28,13 +30,21 @@ class App extends Component {
     });
   }
 
+  handleNoteDelete = (target) => {
+    const id = parseInt(target, 10);    
+    this.setState({
+      output: this.state.output.filter( note => note.id !== id)
+    });
+  }
+
   handleFormSubmit = () => {
     const oldOutput = this.state.output;
     this.setState({
-      output: [ ...oldOutput, this.state.input, ],
+      output: [ ...oldOutput, {id, ...this.state.input}],
       input: {title: '', body: ''}
  
     });
+    id+=1
   }
 
   handleFormChange = (target) => {
@@ -59,6 +69,7 @@ class App extends Component {
         <Note
           texts={output}
           onNoteEdit={this.handleNoteEdit}
+          onNoteDelete={this.handleNoteDelete}
         />
       </div>
     );
