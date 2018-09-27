@@ -4,4 +4,15 @@
 
 .Note {
 	background: white;
+	padding: 14px 14px;
+	margin: 10px;
+}
+
+.NoteInput {
+	border: none;
+	padding: 4px 4px;
+}
+
+.NoteInput:focus {
+	outline: none;
 }
