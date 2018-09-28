@@ -10,7 +10,9 @@ class App extends Component {
     super(props);
     this.state = {
       input: {title: '', body: ''},
-      output: []
+      output: [],
+      previousOutput: [],
+      deleted: false
 
     };
 
@@ -18,6 +20,7 @@ class App extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleNoteEdit = this.handleNoteEdit.bind(this);
     this.handleNoteDelete = this.handleNoteDelete.bind(this);
+    this.handleUndo = this.handleUndo.bind(this);
   }
 
   handleNoteEdit = (target) => {
@@ -30,10 +33,21 @@ class App extends Component {
     });
   }
 
+  handleUndo = () => {
+    const previousOutput = this.state.previousOutput;
+    this.setState({
+      output: previousOutput[previousOutput.length - 1],
+      deleted: previousOutput.length > 1,
+      previousOutput: previousOutput.slice(0,-1)
+    })
+  }
+
   handleNoteDelete = (target) => {
     const id = parseInt(target, 10);    
     this.setState({
-      output: this.state.output.filter( note => note.id !== id)
+      previousOutput: [...this.state.previousOutput, this.state.output],
+      output: this.state.output.filter( note => note.id !== id),
+      deleted: true
     });
   }
 
@@ -56,7 +70,7 @@ class App extends Component {
   render() {
     const input = this.state.input;
     const output = this.state.output;
-
+    const deleted = this.state.deleted;
     return (
       <div className="App">
         <NoteForm
@@ -66,6 +80,11 @@ class App extends Component {
           onFormSubmit={this.handleFormSubmit}
           input={input}
         />
+        <span>
+        {
+          deleted && <button onClick={this.handleUndo}>Undo</button>
+        }
+        </span>
         <Note
           texts={output}
           onNoteEdit={this.handleNoteEdit}
