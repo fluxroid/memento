@@ -82,7 +82,11 @@ class App extends Component {
         />
         <span>
         {
-          deleted && <button onClick={this.handleUndo}>Undo</button>
+          deleted && 
+          <button 
+            onClick={this.handleUndo}
+            className={'Undo'}
+          >Undo</button>
         }
         </span>
         <Note

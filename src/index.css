@@ -5,3 +5,10 @@ body {
   background-color: #98FB98; 
 
 }
+
+textarea {
+	resize: none;
+	overflow: hidden;
+	width: 95%;
+	display: block;
+}
