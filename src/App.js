@@ -3,14 +3,16 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 import './App.css';
 
-var id = 0;
+var idCache = localStorage.getItem('id');
+var id = idCache? JSON.parse(idCache) : 0;
 
 class App extends Component {
   constructor(props) {
     super(props);
+    const cachedNotes = localStorage.getItem('output');
     this.state = {
       input: {title: '', body: ''},
-      output: [],
+      output: cachedNotes? JSON.parse(cachedNotes) : [],
       previousOutput: [],
       deleted: false
 
@@ -31,6 +33,7 @@ class App extends Component {
     this.setState({
       output: output
     });
+    localStorage.setItem("output", JSON.stringify(this.state.output))
   }
 
   handleUndo = () => {
@@ -43,22 +46,27 @@ class App extends Component {
   }
 
   handleNoteDelete = (target) => {
-    const id = parseInt(target, 10);    
+    const id = parseInt(target, 10);
+    const newOutput = this.state.output.filter( note => note.id !== id);   
     this.setState({
       previousOutput: [...this.state.previousOutput, this.state.output],
-      output: this.state.output.filter( note => note.id !== id),
+      output: newOutput,
       deleted: true
     });
+    localStorage.setItem("output", JSON.stringify(newOutput));
   }
 
   handleFormSubmit = () => {
     const oldOutput = this.state.output;
+    const newOutput = [ ...oldOutput, {id, ...this.state.input}];
+    localStorage.setItem("output", JSON.stringify(newOutput))
     this.setState({
-      output: [ ...oldOutput, {id, ...this.state.input}],
+      output: newOutput,
       input: {title: '', body: ''}
  
     });
-    id+=1
+    id+=1;
+    localStorage.setItem("id", JSON.stringify(id));
   }
 
   handleFormChange = (target) => {
