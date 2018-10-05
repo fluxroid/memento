@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
+import Timer from './Timer.js';
 import './App.css';
 
 var idCache = localStorage.getItem('id');
@@ -81,6 +82,7 @@ class App extends Component {
     const deleted = this.state.deleted;
     return (
       <div className="App">
+        <Timer />
         <NoteForm
           head={'Title'} 
           body={'Take a Note...'} 
