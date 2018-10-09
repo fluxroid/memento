@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
-import Timer from './Timer.js';
 import './App.css';
 
 var idCache = localStorage.getItem('id');
@@ -46,20 +45,21 @@ class App extends Component {
     })
   }
 
-  handleNoteDelete = (target) => {
+  handleNoteDelete = (target, timer=false) => {
     const id = parseInt(target, 10);
     const newOutput = this.state.output.filter( note => note.id !== id);   
     this.setState({
       previousOutput: [...this.state.previousOutput, this.state.output],
       output: newOutput,
-      deleted: true
+      deleted: timer ? false : true
     });
     localStorage.setItem("output", JSON.stringify(newOutput));
   }
 
   handleFormSubmit = () => {
+    const date = {date: new Date()};
     const oldOutput = this.state.output;
-    const newOutput = [ ...oldOutput, {id, ...this.state.input}];
+    const newOutput = [ ...oldOutput, {id, ...this.state.input, ...date}];
     localStorage.setItem("output", JSON.stringify(newOutput))
     this.setState({
       output: newOutput,
@@ -82,7 +82,6 @@ class App extends Component {
     const deleted = this.state.deleted;
     return (
       <div className="App">
-        <Timer />
         <NoteForm
           head={'Title'} 
           body={'Take a Note...'} 

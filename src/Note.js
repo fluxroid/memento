@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Timer from './Timer.js';
 
 class Note extends Component {
 	constructor(props) {
@@ -98,7 +99,16 @@ class Note extends Component {
 		  						>
 		  						{text.body}
 		  						</div>
+
 	  						}
+	  						<div>
+								<Timer
+								id={text.id}
+								onNoteDelete={this.props.onNoteDelete}
+								time={text.date} 
+								/>
+
+							</div>
 	  					</div>
 	  					
 

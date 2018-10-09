@@ -72,3 +72,8 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 	background-color: white;
 	padding: 10px;
 }
+
+.Timer {
+	float: right;
+	font-size: 10px;
+}
