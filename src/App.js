@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
+import NavBar from './NavBar.js'
 import './App.css';
 
 var idCache = localStorage.getItem('id');
@@ -82,9 +83,10 @@ class App extends Component {
     const deleted = this.state.deleted;
     return (
       <div className="App">
+        <NavBar />
         <NoteForm
           head={'Title'} 
-          body={'Take a Note...'} 
+          body={'Content'} 
           onFormChange={this.handleFormChange}
           onFormSubmit={this.handleFormSubmit}
           input={input}

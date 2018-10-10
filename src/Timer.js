@@ -38,7 +38,6 @@ class Timer extends Component {
 			this.timerOver();
 		}
 		else {
-			console.log('eys')
 			const updatedTime = this.state.time - diff;
 			this.setState({
 				time: new Date(updatedTime)
