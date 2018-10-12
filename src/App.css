@@ -10,6 +10,7 @@
 .NoteInputTitle, .NoteInputBody {
 	border: none;
 	padding: 4px 4px;
+	white-space: pre-line;
 }
 
 .NoteInputTitle:focus, .NoteInputBody:focus {
@@ -49,6 +50,7 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 
 .NoteForm {
 	margin: 80px;
+	margin-bottom: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -60,6 +62,7 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 	border-radius: 4px;
 	border: 2px solid white;
 	width: 360px;
+	font-size: 20px;
 }
 
 .NoteForm > input[type=submit] {
