@@ -4,9 +4,9 @@
 }
 
 .Note {
-	background: white;
+	background: #F5FFFA;
 	border-radius: 4px;
-	border: 2px solid white;
+	border: 2px solid #F5FFFA;
 	padding: 12px;
 	margin: 24px;
 	box-sizing: border-box;
@@ -36,7 +36,7 @@
 }
 
 textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
-	border: 2px solid black;
+	border: 2px solid #333;
 }
 
 .NoteInputTitle {
@@ -66,20 +66,20 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 .NoteForm > input[type=text] {
 	padding: 10px;
 	border-radius: 4px;
-	border: 2px solid white;
+	border: 2px solid #F5FFFA;
 	width: 360px;
 	font-size: 20px;
 }
 
 .NoteForm > input[type=submit] {
-	background-color: white;
+	background-color: #F5FFFA;
 	padding: 10px;
 }
 
 .Undo {
 	margin: auto;
 	display: block;
-	background-color: white;
+	background-color: #F5FFFA;
 	padding: 10px;
 }
 
