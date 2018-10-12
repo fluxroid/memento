@@ -5,8 +5,17 @@ class HomePage extends Component {
 		super(props)
 	}
 	render() {
+		const text = `memento
+		/məˈmenˌtō/
+		noun
+		an object kept as a reminder or 
+		souvenir of a person or 
+		event.`
+
 		return (
-			<div>Home</div>
+			<div className="HomeContainer">
+				<div className="HomeContent">{text}</div>
+			</div>
 		)
 	}
 }

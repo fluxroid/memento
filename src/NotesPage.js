@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
-import NavBar from './NavBar.js'
 
 var idCache = localStorage.getItem('id');
 var id = idCache? JSON.parse(idCache) : 0;

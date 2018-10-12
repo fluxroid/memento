@@ -8,10 +8,10 @@ const NavBar = (loginStatus, signOut) => {
 				<li><Link to="/">Home</Link></li>
 				<li><Link to="/notes">Notes</Link></li>
 				<li><Link to="/goals">Goals</Link></li>
-				<li><Link to="/login">Login</Link></li>
 			</ul>
 		</div>
 		);
 }
+//<li><Link to="/login">Login</Link></li>
 
 export default NavBar;
