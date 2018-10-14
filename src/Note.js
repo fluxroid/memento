@@ -107,11 +107,8 @@ class Note extends Component {
 								onNoteDelete={this.props.onNoteDelete}
 								time={text.date} 
 								/>
-
 							</div>
 	  					</div>
-	  					
-
 					</div>
 					)
 				})

@@ -17,8 +17,6 @@ class NoteForm extends Component {
     this.props.onFormSubmit(); 
   }
 
-
-
   handleChange = (event) => {
     this.props.onFormChange(event.target);
   }
