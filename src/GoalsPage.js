@@ -5,14 +5,19 @@ class GoalsPage extends Component {
 	constructor(props) {
 		super(props)
 	 	this.state = {
-      input: {body: '', steps:[]},
+      input: {title: '', stepForms: []},
       output: [],
       deleted: false,
-      previousOutput: []
+      previousOutput: [],
+      id: 0
     };
 
-    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleFormTitleChange = this.handleFormTitleChange.bind(this);
+    this.handleFormStepChange = this.handleFormStepChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleFormDelete = this.handleFormDelete.bind(this);
+    this.incrementStep = this.incrementStep.bind(this);
+
 	}
 
 	handleFormSubmit = () => {
@@ -20,28 +25,55 @@ class GoalsPage extends Component {
     const newOutput = [ ...oldOutput, {...this.state.input}];
     this.setState({
       output: newOutput,
-      input: {body: ''} 
+      input: {title: '', stepForms: []} 
     });
   }
 
-  handleFormChange = (target) => {
-    this.setState({
+  handleFormTitleChange = (target) => {
+  	this.setState({
       input: { ...this.state.input, ...{[target.name]: target.value} }
     });
   }
 
+  handleFormStepChange = (target) => {
+  	const oldInput = this.state.input;
+  	const newStepForms = [...oldInput.stepForms];
+  	newStepForms[target.id] = {...newStepForms[target.id], content: target.value}; 
+  	this.setState({
+  		input: {...oldInput, stepForms: newStepForms}
+  	});
+  }
+  handleFormDelete = (target) => {
+  	const id = parseInt(target.name, 10);
+  	const oldInput = this.state.input;
+  	const newStepForms = oldInput.stepForms.filter((stepForm) => stepForm.id !== id);	
+  	this.setState({
+  		input: {...oldInput, stepForms: newStepForms}
+  	});
+  }
+
+  incrementStep = () => {
+  	const input = this.state.input;
+  	this.setState((state) => ({
+  		id: state.id + 1,
+  		input: {...input, stepForms: [...input.stepForms, {id: state.id, content: ""}]}
+  	}));
+  }
+
 	render() {
 		const {input, output, deleted} = {...this.state};
-
 		return (
 			<div>
 			<GoalForm
-					body={'Write a goal'} 
-          onFormChange={this.handleFormChange}
+					title={'Write a goal'}
+          onFormTitleChange={this.handleFormTitleChange}
+          onFormStepChange={this.handleFormStepChange}
           onFormSubmit={this.handleFormSubmit}
+          onFormDelete={this.handleFormDelete}
+          onIncrementStep={this.incrementStep}
           input={input}
 			/>
-			<p>{input.body}</p>
+			<p>{input.title}</p>
 			</div>
 		)
 	}
