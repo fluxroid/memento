@@ -24,6 +24,15 @@
 	overflow-wrap: break-word; 
 }
 
+.DropDown {
+	float: right;
+}
+
+.DropDown > button {
+	border: none;
+	background: white;
+}
+
 
 .NoteContainer {
 	display: grid;
@@ -117,4 +126,15 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 	font-family: Courier;
 	white-space: pre-line;
 	text-align: left;
+}
+
+.Goal {
+	border: 2px solid black;
+	padding: 32px;
+}
+
+.GoalContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-flow: row dense;
 }

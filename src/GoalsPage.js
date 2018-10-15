@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoalForm from './GoalForm.js';
+import Goal from './Goal.js';
 
 class GoalsPage extends Component {
 	constructor(props) {
@@ -62,18 +63,21 @@ class GoalsPage extends Component {
 
 	render() {
 		const {input, output, deleted} = {...this.state};
+		const steps = input.stepForms.map((stepForm) => <p>{stepForm.content}</p>)
 		return (
 			<div>
 			<GoalForm
-					title={'Write a goal'}
-          onFormTitleChange={this.handleFormTitleChange}
-          onFormStepChange={this.handleFormStepChange}
-          onFormSubmit={this.handleFormSubmit}
-          onFormDelete={this.handleFormDelete}
-          onIncrementStep={this.incrementStep}
-          input={input}
+				title={'Write a goal'}
+        onFormTitleChange={this.handleFormTitleChange}
+        onFormStepChange={this.handleFormStepChange}
+        onFormSubmit={this.handleFormSubmit}
+        onFormDelete={this.handleFormDelete}
+        onIncrementStep={this.incrementStep}
+        input={input}
 			/>
-			<p>{input.title}</p>
+			<Goal
+				goals={output}
+			/>
 			</div>
 		)
 	}
