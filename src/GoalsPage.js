@@ -10,7 +10,8 @@ class GoalsPage extends Component {
       output: [],
       deleted: false,
       previousOutput: [],
-      id: 0
+      goalId: 0,
+      stepId: 0
     };
 
     this.handleFormTitleChange = this.handleFormTitleChange.bind(this);
@@ -23,10 +24,12 @@ class GoalsPage extends Component {
 
 	handleFormSubmit = () => {
     const oldOutput = this.state.output;
-    const newOutput = [ ...oldOutput, {...this.state.input}];
+    const id = this.state.goalId;
+    const newOutput = [ ...oldOutput, {id, ...this.state.input}];
     this.setState({
       output: newOutput,
-      input: {title: '', stepForms: []} 
+      input: {title: '', stepForms: []}, 
+      goalId: id + 1
     });
   }
 
@@ -56,8 +59,8 @@ class GoalsPage extends Component {
   incrementStep = () => {
   	const input = this.state.input;
   	this.setState((state) => ({
-  		id: state.id + 1,
-  		input: {...input, stepForms: [...input.stepForms, {id: state.id, content: ""}]}
+  		stepId: this.state.stepId + 1,
+  		input: {...input, stepForms: [...input.stepForms, {id: this.state.stepId, content: ""}]}
   	}));
   }
 

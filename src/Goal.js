@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 
+
 class Goal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: "+",
-			visible: false
+			visible: {} 
 		};
 		this.handleDrop = this.handleDrop.bind(this);
 	}
 
-	handleDrop() {
-		this.setState({
-			text: this.state.text === "+"? "-" : "+",
-			visible: !this.state.visible
-		});
+	handleDrop(event) {
+		const oldVisible = this.state.visible;
+		if (event.target.name in this.state.visible){
+			const newValue = !oldVisible[event.target.name];
+			this.setState({
+				visible: {...oldVisible, ...{[event.target.name]: newValue } }
+			});
+		}
+		else {
+			this.setState({
+				visible: {... oldVisible, ...{[event.target.name]: true }}
+			});
+		}
 	}
 
 	render () {
@@ -30,21 +38,22 @@ class Goal extends Component {
 				);	
 			})
 			return (
-			<div className={"Goal"}>
+			<div key={goal.id} className={"Goal"}>
 				<div>
 					<input type="checkbox" 
 					/>
 					<span>{goal.title}</span>
 					<span className={"DropDown"}>
-						<button 
+						<button
+							name={goalIndex} 
 							type="text"
 							onClick={this.handleDrop}
 						>
-							{this.state.text}
+							{this.state.visible[goalIndex] ? "-" : "+" }
 						</button>
 					</span>
 				</div>
-				<div>{this.state.visible && steps}</div>
+				<div>{this.state.visible[goalIndex] && steps}</div>
 			</div>
 			);
 				}
