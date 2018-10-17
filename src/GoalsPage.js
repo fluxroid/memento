@@ -5,12 +5,15 @@ import Goal from './Goal.js';
 class GoalsPage extends Component {
 	constructor(props) {
 		super(props)
+		const cachedGoals = localStorage.getItem('goals');
+		const goalIdCache = localStorage.getItem('goalId');
+
 	 	this.state = {
       input: {title: '', stepForms: []},
-      output: [],
+      output: cachedGoals? JSON.parse(cachedGoals) : [],
       deleted: false,
       previousOutput: [],
-      goalId: 0,
+      goalId: goalIdCache? JSON.parse(goalIdCache) : 0,
       stepId: 0
     };
 
@@ -29,8 +32,12 @@ class GoalsPage extends Component {
     this.setState({
       output: newOutput,
       input: {title: '', stepForms: []}, 
-      goalId: id + 1
+      goalId: id + 1,
+      previousOutput: oldOutput,
+      stepId: 0
     });
+    localStorage.setItem("goalIdCache", JSON.stringify(this.state.goalId));
+    localStorage.setItem("goals", JSON.stringify(newOutput))
   }
 
   handleFormTitleChange = (target) => {
