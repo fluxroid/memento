@@ -36,7 +36,7 @@ class GoalsPage extends Component {
       previousOutput: oldOutput,
       stepId: 0
     });
-    localStorage.setItem("goalIdCache", JSON.stringify(this.state.goalId));
+    localStorage.setItem("goalId", JSON.stringify(id+1));
     localStorage.setItem("goals", JSON.stringify(newOutput))
   }
 
@@ -54,6 +54,7 @@ class GoalsPage extends Component {
   		input: {...oldInput, stepForms: newStepForms}
   	});
   }
+  
   handleFormDelete = (target) => {
   	const id = parseInt(target.name, 10);
   	const oldInput = this.state.input;

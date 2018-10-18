@@ -1,37 +1,52 @@
 import React, { Component } from 'react';
-
+import CheckBox from './CheckBox.js'
 
 class Goal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: {} 
+			visible: {},
+			checked: {}		
 		};
 		this.handleDrop = this.handleDrop.bind(this);
+		this.handleCheck = this.handleCheck.bind(this); 
 	}
 
 	handleDrop(event) {
 		const oldVisible = this.state.visible;
-		if (event.target.name in this.state.visible){
-			const newValue = !oldVisible[event.target.name];
+		const value = oldVisible[event.target.name];
+		this.setState({
+				visible: {... oldVisible, ...{[event.target.name]: !value }}
+		});
+	}
+	
+
+	handleCheck(event) {
+		const oldChecked = this.state.checked;
+		const [goalIndex, key] = event.target.name.split(',');
+		if (goalIndex in oldChecked){
+			const newValue = {[key]: !oldChecked[goalIndex][key]};
+			const newObj = {[goalIndex]: {...oldChecked[goalIndex], ...newValue}};
 			this.setState({
-				visible: {...oldVisible, ...{[event.target.name]: newValue } }
+				checked: {... oldChecked, ...newObj}
 			});
 		}
 		else {
+			const newObj = {[goalIndex]: {[key]: true}}
 			this.setState({
-				visible: {... oldVisible, ...{[event.target.name]: true }}
-			});
+				checked: {...oldChecked, ...newObj}
+			})
 		}
 	}
 
 	render () {
+		const checked = this.state.checked;
 		const goals = this.props.goals.map( (goal, goalIndex) => {
 			const steps = goal.stepForms.map( (step, stepIndex) => {
 				return (
 					<div key={step.id}>
-							<input 
-								type="checkbox" 							
+							<CheckBox
+								parent={goalIndex in checked && checked[goalIndex]['title']}
 							/>
 							<span>{step.content}</span>
 					</div>
@@ -41,6 +56,8 @@ class Goal extends Component {
 			<div key={goal.id} className={"Goal"}>
 				<div>
 					<input type="checkbox" 
+						name={goalIndex+","+"title"}
+						onChange={this.handleCheck}
 					/>
 					<span>{goal.title}</span>
 					<span className={"DropDown"}>
