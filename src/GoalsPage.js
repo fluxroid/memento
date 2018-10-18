@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoalForm from './GoalForm.js';
 import Goal from './Goal.js';
+import './GoalPage.css';
 
 class GoalsPage extends Component {
 	constructor(props) {
@@ -29,7 +30,6 @@ class GoalsPage extends Component {
 	handleFormSubmit = () => {
     const oldOutput = this.state.output;
     const id = this.state.goalId;
-    console.log(id);
     const newOutput = [ ...oldOutput, {id, ...this.state.input}];
     this.setState({
       output: newOutput,
@@ -70,7 +70,6 @@ class GoalsPage extends Component {
     let [goalIndex, stepIndex] = target.name.split(',');
     goalIndex = parseInt(goalIndex, 10);
     stepIndex = parseInt(stepIndex, 10);
-    console.log(goalIndex)
     const output = [...this.state.output]
     const key = stepIndex === -1? "title" : "content";
     if (key === "title") {
@@ -108,7 +107,7 @@ class GoalsPage extends Component {
 	render() {
 		const {input, output, deleted} = {...this.state};
 		return (
-			<div>
+			<div className={"GoalPage"}>
 			<GoalForm
         onFormTitleChange={this.handleFormTitleChange}
         onFormStepChange={this.handleFormStepChange}

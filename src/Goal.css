@@ -9,7 +9,7 @@
 
 .GoalTitle {
 	background: #F5FFFA;
-	font-size: 1.5em;
+	font-size: 1.4em;
 	font-weight: bold;
 	font-color: #333;
 	border: none;
@@ -37,27 +37,29 @@
 
 .GoalContainer {
 	width: 80%;
-	margin: 20px auto;
-	column-count: 2;
-	column-gap: 0;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
 }
 
 .DropDown, .DeleteGoal {
 	float: right;
 }
 
-.DropDown > button, .DeleteGoal > button {
+.DropDown > button, 
+.DeleteGoal > button {
 	border: none;
 	color: #333;
 	margin: .2em;
-}
-
-.DropDown > button:hover, .DeleteGoal > button:hover {
-	background: #C0C0C0;
-}
-
-.DropDown > button:focus, .DeleteGoal > button{
 	outline: none;
+}
+
+.DropDown > button:hover, 
+.DeleteGoal > button:hover {
+	background: #C0C0C0;
 }
 
 .CheckBox {

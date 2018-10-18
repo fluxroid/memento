@@ -36,6 +36,10 @@
 	border-radius: 4px;
 }
 
+.DeleteStep:hover, .AddStep:hover, .Submit:hover {
+	background: #C0C0C0;
+}
+
 .DeleteStep {
 	height: 1.5em;
 	width: 1.5em;

@@ -1,3 +1,7 @@
+*:focus {
+	outline: 2px solid #1E90FF;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,9 +12,8 @@ body {
 textarea {
 	resize: none;
 	overflow: hidden;
-	width: 95%;
-	display: block;
 	background: #F5FFFA;
+	height: 100%;
 }
 
 ul {
