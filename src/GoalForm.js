@@ -56,7 +56,6 @@ class GoalForm extends Component {
         autoComplete={"off"}
       >
         <input type="text" 
-          placeholder={this.props.input.title} 
           value={this.props.input.title} 
           onChange={this.handleChange}
           name="title" 

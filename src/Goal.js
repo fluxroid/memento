@@ -17,7 +17,7 @@ class Goal extends Component {
 		const oldVisible = this.state.visible;
 		const value = oldVisible[event.target.name];
 		this.setState({
-				visible: {... oldVisible, ...{[event.target.name]: !value }}
+				visible: {...oldVisible, ...{[event.target.name]: !value }}
 		});
 	}
 	
@@ -29,7 +29,7 @@ class Goal extends Component {
 			const newValue = {[key]: !oldChecked[goalIndex][key]};
 			const newObj = {[goalIndex]: {...oldChecked[goalIndex], ...newValue}};
 			this.setState({
-				checked: {... oldChecked, ...newObj}
+				checked: {...oldChecked, ...newObj}
 			});
 		}
 		else {
@@ -49,7 +49,14 @@ class Goal extends Component {
 							<CheckBox
 								parent={goalIndex in checked && checked[goalIndex]['title']}
 							/>
-							<span className="Children">{step.content}</span>
+							<span className="Children">
+								<input type="text" 
+          				value={step.content}
+          				name={goalIndex+","+stepIndex} 
+          				onChange={(event)=> this.props.onGoalEdit(event.target)}
+          				className={"Children"}
+        				/>
+							</span>
 					</div>
 				);	
 			})
@@ -57,11 +64,18 @@ class Goal extends Component {
 			<div key={goal.id} className={"Goal"}>
 				<div>
 					<input type="checkbox" 
-						name={goalIndex+","+"title"}
+						name={goalIndex+",title"}
 						onChange={this.handleCheck}
 						className={"CheckBox"}
 					/>
-					<span className={"GoalTitle"}>{goal.title}</span>
+					<span>
+						<input type="text" 
+          		value={goal.title} 
+          		name={goalIndex+",-1"}
+          		onChange={(event)=> this.props.onGoalEdit(event.target)}
+          		className={"GoalTitle"}
+        		/>
+					</span>
 					<span className={"DeleteGoal"}>
 						<button
 							name={goal.id}
