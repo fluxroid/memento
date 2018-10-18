@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Goal.css';
 import CheckBox from './CheckBox.js'
 
 class Goal extends Component {
@@ -48,7 +49,7 @@ class Goal extends Component {
 							<CheckBox
 								parent={goalIndex in checked && checked[goalIndex]['title']}
 							/>
-							<span>{step.content}</span>
+							<span className="Children">{step.content}</span>
 					</div>
 				);	
 			})
@@ -58,8 +59,18 @@ class Goal extends Component {
 					<input type="checkbox" 
 						name={goalIndex+","+"title"}
 						onChange={this.handleCheck}
+						className={"CheckBox"}
 					/>
-					<span>{goal.title}</span>
+					<span className={"GoalTitle"}>{goal.title}</span>
+					<span className={"DeleteGoal"}>
+						<button
+							name={goal.id}
+							type="text"
+							onClick={(event) => this.props.onGoalDelete(event.target)}
+						>
+							x
+						</button>
+					</span>
 					<span className={"DropDown"}>
 						<button
 							name={goalIndex} 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './GoalForm.css';
+
 
 class GoalForm extends Component {
 	constructor(props) {
@@ -36,20 +38,21 @@ class GoalForm extends Component {
 	  			onChange={this.handleChange}
 	  			name={"stepForm"}
 	  			id={index}
+	  			className={"StepForm"}
 	  		/>
-	  		<input type="button" 
-	  			value="X" 
+	  		<input type="button"
+	  			value="x" 
 	  			onClick={this.handleDeleteStep} 
 	  			name={form.id}
+	  			className={"DeleteStep"}
 	  		/>
   		</div>
   	);
 
 		return (
-			<div>
+			<div className="GoalForm">
 			<form 
         onSubmit={this.handleSubmit} 
-        className={"GoalForm"}
         autoComplete={"off"}
       >
         <input type="text" 
@@ -57,12 +60,21 @@ class GoalForm extends Component {
           value={this.props.input.title} 
           onChange={this.handleChange}
           name="title" 
+          className={"Title"}
+          placeholder={"Title"}
         />
         <input type="button" 
         	value="Add Step" 
-        	onClick={this.props.onIncrementStep}/>
+        	onClick={this.props.onIncrementStep}
+        	className={"AddStep"}
+        	/>
         {stepForms}
-       <input type="submit" value="Submit" />
+        <div>
+       <input type="submit" 
+       	value="Submit"
+       	className={"Submit"}
+       	/>
+      	</div>
       </form>
       <p>{this.state.steps}</p>
       </div>

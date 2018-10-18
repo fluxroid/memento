@@ -24,20 +24,12 @@
 	overflow-wrap: break-word; 
 }
 
-.DropDown {
-	float: right;
-}
-
-.DropDown > button {
-	border: none;
-	background: white;
-}
-
-
 .NoteContainer {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-auto-flow: row dense;
+	width: 80%;
+	margin: 20px auto;
 }
 
 .NoteInputBody {
@@ -64,7 +56,8 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 }
 
 .NoteForm {
-	margin: 80px;
+	width: 80%;
+	margin: 35px auto;
 	margin-bottom: 0px;
 	display: flex;
 	justify-content: center;
@@ -81,14 +74,16 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 }
 
 .NoteForm > input[type=submit] {
-	background-color: #F5FFFA;
+	border-radius: 4px;
+	background: #D3D3D3;
 	padding: 10px;
 }
 
 .Undo {
+	border-radius: 4px;
+	background: #D3D3D3;
 	margin: auto;
 	display: block;
-	background-color: #F5FFFA;
 	padding: 10px;
 }
 
@@ -98,7 +93,7 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 }
 
 .NavBar {
-	background-color: #333;
+	background-color: #272D2D;
 }
 
 .NavBar li {
@@ -126,15 +121,4 @@ textarea.NoteInputBody:hover, textarea.NoteInputTitle:hover {
 	font-family: Courier;
 	white-space: pre-line;
 	text-align: left;
-}
-
-.Goal {
-	border: 2px solid black;
-	padding: 32px;
-}
-
-.GoalContainer {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-auto-flow: row dense;
 }

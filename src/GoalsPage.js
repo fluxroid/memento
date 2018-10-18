@@ -20,14 +20,15 @@ class GoalsPage extends Component {
     this.handleFormTitleChange = this.handleFormTitleChange.bind(this);
     this.handleFormStepChange = this.handleFormStepChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleGoalDelete = this.handleGoalDelete.bind(this);
     this.handleFormDelete = this.handleFormDelete.bind(this);
     this.incrementStep = this.incrementStep.bind(this);
-
 	}
 
 	handleFormSubmit = () => {
     const oldOutput = this.state.output;
     const id = this.state.goalId;
+    console.log(id);
     const newOutput = [ ...oldOutput, {id, ...this.state.input}];
     this.setState({
       output: newOutput,
@@ -64,6 +65,18 @@ class GoalsPage extends Component {
   	});
   }
 
+  handleGoalDelete = (target) => {
+    const id = parseInt(target.name, 10);
+    console.log(id);
+    const newGoal = this.state.output.filter(( goal => goal.id !== id));
+    this.setState({
+      previousOutput: [...this.state.previousOutput, this.state.newGoal],
+      output: newGoal,
+      deleted: true
+    });
+    localStorage.setItem("goals", JSON.stringify(newGoal));
+  }
+
   incrementStep = () => {
   	const input = this.state.input;
   	this.setState((state) => ({
@@ -74,7 +87,6 @@ class GoalsPage extends Component {
 
 	render() {
 		const {input, output, deleted} = {...this.state};
-		const steps = input.stepForms.map((stepForm) => <p>{stepForm.content}</p>)
 		return (
 			<div>
 			<GoalForm
@@ -88,6 +100,7 @@ class GoalsPage extends Component {
 			/>
 			<Goal
 				goals={output}
+        onGoalDelete={this.handleGoalDelete}
 			/>
 			</div>
 		)

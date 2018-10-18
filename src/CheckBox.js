@@ -21,6 +21,7 @@ class CheckBox extends Component {
 				type={"checkbox"}
 				checked={this.props.parent || this.state.checked}
 				onChange={this.handleCheck}
+				className={"CheckBox"}
 				/>
 		)
 	}

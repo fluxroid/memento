@@ -1,0 +1,42 @@
+.Title:focus, .StepForm:focus {
+	outline: none;
+}
+
+.Title {
+	font-size: 28px;
+	border: none;
+	padding: 4px 4px;
+	background: #F5FFFA;
+	font-weight: bold;
+}
+
+.GoalForm {
+	background: #F5FFFA;
+	margin: 35px auto;
+	width: 400px;
+	border-radius: 4px;
+	height: auto;
+	padding: 10px;
+}
+
+.StepForm {
+	border: 2px solid #8C8C8C;
+	width: 90%;
+	font-size: 1.5em;
+	margin: 4px;
+}
+
+.DeleteStep, .AddStep, .Submit {
+	color: #333;
+	border: none;
+	background: #D3D3D3;
+	font-size: 14px;
+	padding: 6px;
+	margin: 2px;
+	border-radius: 4px;
+}
+
+.DeleteStep {
+	height: 1.5em;
+	width: 1.5em;
+}
