@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
-var idCache = localStorage.getItem('id');
-var id = idCache? JSON.parse(idCache) : 0;
-
 class NotesPage extends Component {
   constructor(props) {
     super(props);
-    const cachedNotes = localStorage.getItem('output');
     this.state = {
       input: {title: '', body: ''},
-      output: cachedNotes? JSON.parse(cachedNotes) : [],
+      output: this.props.load('output', []),
       deleted: false,
-      previousOutput: []
-
+      previousOutput: [],
+      id: this.props.load('id', 0)
     };
 
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -31,7 +27,7 @@ class NotesPage extends Component {
     this.setState({
       output: output
     });
-    localStorage.setItem("output", JSON.stringify(this.state.output))
+    this.props.save("output", output);
   }
 
   handleUndo = () => {
@@ -51,21 +47,22 @@ class NotesPage extends Component {
       output: newOutput,
       deleted: timer ? false : true
     });
-    localStorage.setItem("output", JSON.stringify(newOutput));
+    this.props.save("output", newOutput);
   }
 
   handleFormSubmit = () => {
     const date = {date: new Date()};
+    const id = this.state.id;
     const oldOutput = this.state.output;
     const newOutput = [ ...oldOutput, {id, ...this.state.input, ...date}];
-    localStorage.setItem("output", JSON.stringify(newOutput))
     this.setState({
       output: newOutput,
-      input: {title: '', body: ''}
+      input: {title: '', body: ''},
+      id: id+1
  
     });
-    id+=1;
-    localStorage.setItem("id", JSON.stringify(id));
+    this.props.save("output", newOutput);
+    this.props.save("id", id+1);
   }
 
   handleFormChange = (target) => {

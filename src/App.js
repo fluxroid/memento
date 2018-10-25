@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
+import withStorage from './withStorage.js'
 import GoalsPage from './GoalsPage.js';
 import HomePage from './HomePage.js';
 import NotesPage from './NotesPage.js';
@@ -18,8 +19,8 @@ class App extends Component {
         <NavBar />
         <div>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/notes" component={NotesPage} />
-          <Route exact path="/goals" component={GoalsPage} />        
+          <Route exact path="/notes" component={withStorage(NotesPage)} />
+          <Route exact path="/goals" component={withStorage(GoalsPage)} />        
         </div>
       </div>
       </Router>

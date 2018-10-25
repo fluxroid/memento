@@ -6,15 +6,12 @@ import './GoalPage.css';
 class GoalsPage extends Component {
 	constructor(props) {
 		super(props)
-		const cachedGoals = localStorage.getItem('goals');
-		const goalIdCache = localStorage.getItem('goalId');
-
 	 	this.state = {
       input: {title: '', stepForms: []},
-      output: cachedGoals? JSON.parse(cachedGoals) : [],
+      output: this.props.load('goals', []),
       deleted: false,
       previousOutput: [],
-      goalId: goalIdCache? JSON.parse(goalIdCache) : 0,
+      goalId: this.props.load('goalId', 0),
       stepId: 0
     };
 
@@ -38,8 +35,8 @@ class GoalsPage extends Component {
       previousOutput: oldOutput,
       stepId: 0
     });
-    localStorage.setItem("goalId", JSON.stringify(id+1));
-    localStorage.setItem("goals", JSON.stringify(newOutput))
+    this.props.save("goals", newOutput);
+    this.props.save("goalId", id+1);   
   }
 
   handleFormTitleChange = (target) => {
@@ -81,7 +78,7 @@ class GoalsPage extends Component {
     this.setState({
       output: output
     });
-    localStorage.setItem("goals", JSON.stringify(this.state.output));
+    this.props.save("goals", output);
   }
   
 
@@ -93,7 +90,7 @@ class GoalsPage extends Component {
       output: newGoal,
       deleted: true
     });
-    localStorage.setItem("goals", JSON.stringify(newGoal));
+    this.props.save("goals", newGoal);
   }
 
   incrementStep = () => {
