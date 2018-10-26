@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class HomePage extends Component {
-	constructor(props) {
-		super(props)
-	}
 	render() {
 		const text = `memento
 		/məˈmenˌtō/

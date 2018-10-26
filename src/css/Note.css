@@ -1,0 +1,51 @@
+.Note {
+	background: #F5FFFA;
+	border-radius: 4px;
+	border: 2px solid #F5FFFA;
+	padding: 12px;
+	margin: .5em;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.NoteInputTitle, .NoteInputBody {
+	border: none;
+	padding: 4px 4px;
+	white-space: pre-line;
+	width: 300px;
+}
+
+
+.NoteInputTitle:focus, .NoteInputBody:focus {
+	outline: 2px solid #333;
+	overflow-wrap: break-word; 
+}
+
+.NoteContainer {
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.NoteInputBody, textarea.NoteInputBody {
+	font-size: 1.2em;
+}
+
+.NoteInputTitle {
+	font-size: 1.6em;
+	font-weight: bold;
+}
+
+.DeleteNoteButton {
+	border: none;
+	float: right;
+}
+
+.DeleteNoteButton:hover {
+	background: #C0C0C0;
+}

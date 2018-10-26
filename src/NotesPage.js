@@ -3,10 +3,6 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
 class NotesPage extends Component {
-  constructor(props) {
-    super(props);  
-	}
-
   render() {  
     return (
     	<div>
@@ -17,7 +13,12 @@ class NotesPage extends Component {
           onFormSubmit={this.props.submit}
           input={this.props.input}
         />
-        <span>
+        <Note
+          texts={this.props.output}
+          onNoteEdit={this.props.edit}
+          onNoteDelete={this.props.delete}
+        />
+        <div>
         {
           this.props.deleted && 
           <button 
@@ -25,12 +26,7 @@ class NotesPage extends Component {
             className={'Undo'}
           >Undo</button>
         }
-        </span>
-        <Note
-          texts={this.props.output}
-          onNoteEdit={this.props.edit}
-          onNoteDelete={this.props.delete}
-        />
+        </div>
         </div>
     );
   }

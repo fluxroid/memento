@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoalForm from './GoalForm.js';
 import Goal from './Goal.js';
-import './GoalPage.css';
+import './css/GoalPage.css';
 
 class GoalsPage extends Component {
 	constructor(props) {
@@ -31,12 +31,10 @@ class GoalsPage extends Component {
   }
 
   incrementStep = () => {
-  	const input = this.state.input;
   	this.setState((state) => ({
   		stepId: this.state.stepId + 1,
   	}));
     this.props.change({name: this.state.stepId, value: ""})
-      //input: {...input, [this.state.stepId]: ""}
   }
 
 	render() {

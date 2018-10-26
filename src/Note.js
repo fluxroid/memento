@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Timer from './Timer.js';
+import './css/Note.css';
 
 class Note extends Component {
 	constructor(props) {

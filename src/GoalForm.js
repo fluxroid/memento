@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './GoalForm.css';
+import './css/GoalForm.css';
 
 
 class GoalForm extends Component {

@@ -1,0 +1,53 @@
+.Undo {
+	border-radius: 4px;
+	background: #272D2D;
+	color: #F5FFFA;
+	margin: 2em auto;
+	display: block;
+	padding: 10px;
+	border: none;
+	width: 4em;
+	height: 3em;
+}
+
+
+
+.Undo:hover {
+	background: #111;
+}
+
+.Timer {
+	float: right;
+	font-size: 10px;
+}
+
+.NavBar {
+	background-color: #272D2D;
+}
+
+.NavBar li {
+	display: inline;
+	margin: 0;
+}
+
+.NavBar li a {
+	display: inline-block;
+	padding: 12px 14px;
+}
+
+.HomeContainer {
+	text-align: center;
+}
+
+.HomeContent {
+	border: 4px solid #F5FFFA;
+	padding: 48px;
+	margin: 10%;
+	display: inline-block;
+	color: #333;
+	font-size: 28px;
+	font-weight: bold;
+	font-family: Courier;
+	white-space: pre-line;
+	text-align: left;
+}

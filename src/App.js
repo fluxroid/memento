@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-import withStorage from './withStorage.js'
-import withFeature from './withFeature.js'
+import withStorage from './hoc/withStorage.js'
+import withFeature from './hoc/withFeature.js'
 import GoalsPage from './GoalsPage.js';
 import HomePage from './HomePage.js';
 import NotesPage from './NotesPage.js';
 import NavBar from './NavBar.js'
-import './App.css';
+import './css/App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);  
-  }
-
+  
   render() {
     return (
       <Router>

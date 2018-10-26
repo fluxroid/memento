@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './css/NoteForm.css';
 
 class NoteForm extends Component {
   constructor(props) {
@@ -13,7 +14,6 @@ class NoteForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({titleRender: false});
     this.props.onFormSubmit(); 
   }
 
