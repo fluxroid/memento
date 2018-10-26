@@ -19,31 +19,30 @@ class GoalForm extends Component {
   	}
 
   handleChange = (event) => {
-  	event.target.name === "stepForm" ? this.props.onFormStepChange(event.target) :
-    this.props.onFormTitleChange(event.target);
+    this.props.onFormChange(event.target);
   	}
 
   handleDeleteStep = (event) => {
-  	console.log(event.target.name)
   	this.props.onFormDelete(event.target);
   }  
 
 	render() {
-		const stepForms = this.props.input.stepForms.map((form, index) =>
-			<div id={form.id} 
-				key={form.id}
+    const {title, ...stepForms} = this.props.input;
+		const children = Object.keys(stepForms).map(id =>
+			<div id={id} 
+				key={id}
 			> 
 	  		<input type="text" 
-	  			value={form.content} 
+	  			value={this.props.input[id]} 
 	  			onChange={this.handleChange}
-	  			name={"stepForm"}
-	  			id={index}
+	  			name={id}
+	  			id={id}
 	  			className={"StepForm"}
 	  		/>
 	  		<input type="button"
 	  			value="x" 
 	  			onClick={this.handleDeleteStep} 
-	  			name={form.id}
+	  			name={id}
 	  			className={"DeleteStep"}
 	  		/>
   		</div>
@@ -56,7 +55,7 @@ class GoalForm extends Component {
         autoComplete={"off"}
       >
         <input type="text" 
-          value={this.props.input.title} 
+          value={title} 
           onChange={this.handleChange}
           name="title" 
           className={"Title"}
@@ -67,7 +66,7 @@ class GoalForm extends Component {
         	onClick={this.props.onIncrementStep}
         	className={"AddStep"}
         	/>
-        {stepForms}
+        {children}
         <div>
        <input type="submit" 
        	value="Submit"
@@ -75,7 +74,6 @@ class GoalForm extends Component {
        	/>
       	</div>
       </form>
-      <p>{this.state.steps}</p>
       </div>
 		);
 	}

@@ -20,7 +20,7 @@ class Note extends Component {
   	}
 
   	handleDelete = (event) => {
-  		this.props.onNoteDelete(event.target.name)
+  		this.props.onNoteDelete(event.target)
   		this.setState({editable: false});
   	}
 
@@ -61,6 +61,7 @@ class Note extends Component {
 	  							onClick={this.handleDelete}
 	  							className={"DeleteNoteButton"}
 	  							name={text.id}
+	  							id={text.id}
 	  						>
 	  							X
 	  						</button>

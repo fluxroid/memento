@@ -43,17 +43,18 @@ class Goal extends Component {
 	render () {
 		const checked = this.state.checked;
 		const goals = this.props.goals.map( (goal, goalIndex) => {
-			const steps = goal.stepForms.map( (step, stepIndex) => {
+			const {title, id, ...steps} = goal;
+			const children = Object.keys(steps).map(stepId => {
 				return (
-					<div key={step.id}>
+					<div key={stepId}>
 							<CheckBox
 								parent={goalIndex in checked && checked[goalIndex]['title']}
 							/>
 							<span className="Children">
 								<input type="text" 
-          				value={step.content}
-          				name={goalIndex+","+stepIndex} 
-          				onChange={(event)=> this.props.onGoalEdit(event.target)}
+          				value={goal[stepId]}
+          				name={goalIndex+","+stepId} 
+          				onChange={event => this.props.onGoalEdit(event.target)}
           				className={"Children"}
         				/>
 							</span>
@@ -61,7 +62,7 @@ class Goal extends Component {
 				);	
 			})
 			return (
-			<div key={goal.id} className={"Goal"}>
+			<div key={id} className={"Goal"}>
 				<div>
 					<input type="checkbox" 
 						name={goalIndex+",title"}
@@ -70,17 +71,17 @@ class Goal extends Component {
 					/>
 					<span>
 						<input type="text" 
-          		value={goal.title} 
-          		name={goalIndex+",-1"}
-          		onChange={(event)=> this.props.onGoalEdit(event.target)}
+          		value={title} 
+          		name={goalIndex+",title"}
+          		onChange={event => this.props.onGoalEdit(event.target)}
           		className={"GoalTitle"}
         		/>
 					</span>
 					<span className={"DeleteGoal"}>
 						<button
-							name={goal.id}
+							name={id}
 							type="text"
-							onClick={(event) => this.props.onGoalDelete(event.target)}
+							onClick={event => this.props.onGoalDelete(event.target)}
 						>
 							x
 						</button>
@@ -95,7 +96,7 @@ class Goal extends Component {
 						</button>
 					</span>
 				</div>
-				<div>{this.state.visible[goalIndex] && steps}</div>
+				<div>{this.state.visible[goalIndex] && children}</div>
 			</div>
 			);
 				}
