@@ -10,8 +10,6 @@
 	height: 3em;
 }
 
-
-
 .Undo:hover {
 	background: #111;
 }
@@ -19,6 +17,48 @@
 .Timer {
 	float: right;
 	font-size: 10px;
+}
+
+.Content {
+	display: flex;
+	flex-direction: row;
+}
+
+.SideBar {
+	margin-left: auto;
+	background-color: #015249;
+	color: #FFFFFA;
+	text-align: left;
+	width: 10%;
+	padding: 1em 1.5em;
+	font-size: 18px;
+}
+
+.SideBarButton {
+	background: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 18px;
+}
+
+.SideBarButton:hover {
+	background: #5F9EA0;
+}
+
+.SideBarHeadings {
+	font-family: 'courier';
+	font-size: 22px;
+	font-weight: bold;
+
+}
+
+.SideBarSection {
+	margin: 0 0 2em 0;
+}
+
+.Filler {
+	margin-right: auto;
+	width: 10%;
 }
 
 .NavBar {
@@ -50,4 +90,29 @@
 	font-family: Courier;
 	white-space: pre-line;
 	text-align: left;
+}
+
+.LabelInput {
+	width: 70%;
+	border: none;
+	padding: 4px;
+	font-size: 14px;
+}
+
+.Label {
+	margin: .2em 0;
+}
+
+.LabelSubmit {
+	color: #333;
+	border: none;
+	background: #D3D3D3;
+	font-size: 14px;
+	padding: 4px;
+	margin: 2px;
+	border-radius: 4px;
+}
+
+.LabelSubmit:hover {
+	background: #C0C0C0;
 }

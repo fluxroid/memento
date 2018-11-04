@@ -9,7 +9,8 @@ function withFeature(WrappedComponent, feature, idName, input) {
 				output: this.props.load(feature, []),
 				id: this.props.load(idName, 0),
 				deleted: false,
-     		previousOutput: []
+     		previousOutput: [],
+     		label: this.props.load('label', [])
 			};
 		}
 

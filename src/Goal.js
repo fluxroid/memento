@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/Goal.css';
 import CheckBox from './CheckBox.js'
+//import Timer from './Timer.js'
 
 class Goal extends Component {
 	constructor(props) {
@@ -43,7 +44,7 @@ class Goal extends Component {
 	render () {
 		const checked = this.state.checked;
 		const goals = this.props.goals.map( (goal, goalIndex) => {
-			const {title, id, ...steps} = goal;
+			const {title, id, date, ...steps} = goal;
 			const children = Object.keys(steps).map(stepId => {
 				return (
 					<div key={stepId}>

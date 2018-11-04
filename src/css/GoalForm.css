@@ -21,9 +21,10 @@
 
 .StepForm {
 	border: 2px solid #8C8C8C;
-	width: 90%;
+	width: 80%;
 	font-size: 1.5em;
 	margin: 4px;
+	padding: 2px;
 }
 
 .DeleteStep, .AddStep, .Submit {
