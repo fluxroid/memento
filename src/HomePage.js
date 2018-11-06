@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class HomePage extends Component {
+	componentDidMount() {
+		this.props.hideSide(true);
+	}
+
 	render() {
 		const text = `memento
 		/məˈmenˌtō/

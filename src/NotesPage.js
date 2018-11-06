@@ -3,6 +3,10 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
 class NotesPage extends Component {
+  componentDidMount() {
+    this.props.hideSide(false);
+  }
+  
   render() {  
     return (
     	<div>

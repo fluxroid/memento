@@ -37,6 +37,10 @@ class GoalsPage extends Component {
     this.props.change({name: this.state.stepId, value: ""})
   }
 
+  componentDidMount() {
+    this.props.hideSide(false);
+  }
+
 	render() {
 		return (
 			<div className={"GoalPage"}>
