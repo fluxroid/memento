@@ -22,9 +22,16 @@ class App extends Component {
   }
 
   render() {
-    const NewSideBar = withStorage(withFeature(SideBar, "label", "labelID", {label: ""}));
     const NewNotesPage = withStorage(withFeature(NotesPage, "output", "id", {title: '', body: ''}));
     const NewGoalsPage = withStorage(withFeature(GoalsPage, "goals", "goalId", {title: ''}));
+    const labelObject = {
+        input: this.props.input,
+        output: this.props.output,
+        submit: this.props.submit, 
+        delete: this.props.delete, 
+        change: this.props.change
+    };
+    const NewSideBar = <SideBar labels = {labelObject}/>;
     
     return (
       <Router>
@@ -36,11 +43,11 @@ class App extends Component {
             <Route exact path="/" 
               render={() => <HomePage hideSide={this.hideSideBar}/>}/>
             <Route exact path="/notes" 
-              render={() => <NewNotesPage hideSide={this.hideSideBar} labels={false}/>}/>
+              render={() => <NewNotesPage hideSide={this.hideSideBar}/>}/>
             <Route exact path="/goals" 
-              render={() => <NewGoalsPage hideSide={this.hideSideBar} labels={false}/>}/>
+              render={() => <NewGoalsPage hideSide={this.hideSideBar} labels = {labelObject}/>}/>
           </div>
-          {this.state.hideSide ? <div className="Filler"></div> : <NewSideBar />}
+          {this.state.hideSide ? <div className="Filler"></div> : NewSideBar}
         </div>
       </div>
       </Router>

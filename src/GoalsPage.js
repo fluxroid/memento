@@ -15,11 +15,11 @@ class GoalsPage extends Component {
     this.incrementStep = this.incrementStep.bind(this);
 	}
 
-	handleFormSubmit = () => {
+	handleFormSubmit = (key='', object={}) => {
     this.setState({
       stepId: 0
     });
-    this.props.submit()
+    this.props.submit(key, object)
   }
 
   handleFormDelete = (target) => {
@@ -45,6 +45,7 @@ class GoalsPage extends Component {
 		return (
 			<div className={"GoalPage"}>
 			<GoalForm
+        labels = {this.props.labels}
         onFormChange={this.props.change}
         onFormSubmit={this.handleFormSubmit}
         onFormDelete={this.handleFormDelete}
@@ -52,6 +53,7 @@ class GoalsPage extends Component {
         input={this.props.input}
 			/>
       <Goal
+        {...this.props}
         goals={this.props.output}
         onGoalDelete={this.props.delete}
         onGoalEdit={this.props.edit}

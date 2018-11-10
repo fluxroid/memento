@@ -44,7 +44,8 @@ class Goal extends Component {
 	render () {
 		const checked = this.state.checked;
 		const goals = this.props.goals.map( (goal, goalIndex) => {
-			const {title, id, date, ...steps} = goal;
+			const {title, id, date, labels, ...steps} = goal;
+			const shownLabels = Object.keys(labels).filter(label => labels[label]);
 			const children = Object.keys(steps).map(stepId => {
 				return (
 					<div key={stepId}>
@@ -63,6 +64,7 @@ class Goal extends Component {
 				);	
 			})
 			return (
+			<div className="GoalWrapper">
 			<div key={id} className={"Goal"}>
 				<div>
 					<input type="checkbox" 
@@ -98,6 +100,12 @@ class Goal extends Component {
 					</span>
 				</div>
 				<div>{this.state.visible[goalIndex] && children}</div>
+			</div>
+			<div className={"GoalLabelContainer"} >
+					<ul>{shownLabels.map(label => 
+						<li className={"GoalLabelSelection"}><button>{label}</button></li>)}
+					</ul>
+			</div>
 			</div>
 			);
 				}

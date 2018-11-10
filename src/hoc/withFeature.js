@@ -23,11 +23,12 @@ function withFeature(WrappedComponent, feature, idName, input) {
     	this.props.save(feature, output);
 		}
 
-		submit = () => {
+		submit = (key='', other={}) => {
 	    const date = {date: new Date()};
 	    const id = this.state.id;
 	    const oldOutput = this.state.output;
-    	const newOutput = [ ...oldOutput, {id, ...this.state.input, ...date}];
+    	const newOutput = (key ==='')? [ ...oldOutput, {id, ...this.state.input, ...date}] : 
+    	[ ...oldOutput, {id, ...this.state.input, ...date, ...{[key]: other} }];
 	    this.setState({
 	    	previousOutput: [...this.state.previousOutput, oldOutput],
 	      output: newOutput,

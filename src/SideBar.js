@@ -4,17 +4,28 @@ class SideBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: false
+			visible: false,
+			deleteVisible: -1
 		};
 	}
 
 	render() {
-		const labels = this.props.output.map(value => {
-			return <li key={value.id} 
-						className={"Label"}
-						>{value.label}
+		const labels = this.props.labels.output.map(value => {
+			return <li key={value.id}
+							className={"Label"}
+							>								
+								{value.label}
+						<button
+							className={"DeleteLabelButton"}
+							name={value.id}
+							onClick={(event) => this.props.labels.delete(event.target)}
+						>
+							X
+						</button>
 						</li>
-		})
+			})
+		const visible = this.state.visible;
+		console.log(this.state.deleteVisible);
 		return (
 			<div className="SideBar">
 			<div className="SideBarSection">
@@ -25,33 +36,42 @@ class SideBar extends Component {
 					>+
 					</button>
 				</div>
+				
 				<ul>
 					{labels}
 					{this.state.visible &&
 						<form 
-	        onSubmit={(event)=> {
-	        	event.preventDefault(); 
-	        	this.props.submit();
-	        	this.setState({visible: false});
-	        }} 
-	        autoComplete={"off"}
-	     		>
-	        <input type="text" 
-	          value={this.props.input['label']} 
-	          onChange={event => 
-	          	{
-	          		this.props.change(event.target);
-	          	}}
-	          name="label" 
-	          className={"LabelInput"}
-	          autoFocus={true}
-	          onBlur={() => this.setState({visible: false})}
-	        />
-	       <input type="submit" 
-	       	value="Ok"
-	       	className={"LabelSubmit"}
-	       	/>
-	      </form>
+		       		onSubmit={(event)=> {
+		        	event.preventDefault(); 
+		        	this.props.labels.submit();
+		        	this.setState({visible: false});
+		        	}} 
+		        	autoComplete={"off"}
+		     		>
+		        <input type="text" 
+		          value={this.props.labels.input['label']} 
+		          onChange={event => 
+		          	{
+		          		this.props.labels.change(event.target);
+		          	}}
+		          name="label" 
+		          className={"LabelInput"}
+		          autoFocus={true}
+		        />
+		       	
+		       	<input type="submit"
+		       		name="submit" 
+		       		value="Ok"
+		       		className={"LabelSubmit"}
+		       	/>
+
+		       <input type="button"
+		       	name="cancel" 
+		       	value="Cancel"
+		       	className={"LabelSubmit"}
+		       	onClick={() => this.setState({visible: false})}
+		       	/>
+	      	</form>
 					}
 				</ul>
 			</div>

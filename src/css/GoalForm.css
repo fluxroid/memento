@@ -10,9 +10,13 @@
 	font-weight: bold;
 }
 
+.GoalFormWithLabel {
+	margin: 35px auto;
+}
+
 .GoalForm {
 	background: #F5FFFA;
-	margin: 35px auto;
+	margin-bottom: 5px;
 	width: 400px;
 	border-radius: 4px;
 	height: auto;
@@ -27,21 +31,57 @@
 	padding: 2px;
 }
 
-.DeleteStep, .AddStep, .Submit {
+.DeleteStep, .AddStep, .Submit, .GoalFormLabel {
 	color: #333;
 	border: none;
-	background: #D3D3D3;
+	background: #DCDCDC;
 	font-size: 14px;
 	padding: 6px;
 	margin: 2px;
 	border-radius: 4px;
 }
 
-.DeleteStep:hover, .AddStep:hover, .Submit:hover {
+.DeleteStep:hover, .AddStep:hover, .Submit:hover, .GoalFormLabel:hover {
 	background: #C0C0C0;
 }
 
 .DeleteStep {
 	height: 1.5em;
 	width: 1.5em;
+}
+
+.LabelContainer {
+	background: #F5FFFA;
+	width: 400px;
+	border-radius: 4px;
+	height: auto;
+	padding: 10px;
+}
+
+.LabelContainer > ul {
+	display: flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
+}
+
+.LabelSelection {
+	margin: 1px;
+}
+
+.LabelSelection > button{
+	color: #333;
+	border: none;
+	background: #90EE90;
+	font-size: 14px;
+	padding: 6px;
+	margin: 2px;
+	border-radius: 4px;
+}
+
+.LabelSelection>button:focus {
+	outline: 1px solid #333;
+}
+
+.LabelSelection > button:hover {
+	background: #E6E6FA;
 }

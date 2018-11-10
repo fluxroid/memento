@@ -45,6 +45,19 @@
 	background: #5F9EA0;
 }
 
+.DeleteLabelButton {
+	background: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 12px;
+	padding: 6px;
+	margin: 2px;
+}
+
+.DeleteLabelButton:hover {
+	background: #5F9EA0;
+}
+
 .SideBarHeadings {
 	font-family: 'courier';
 	font-size: 22px;

@@ -4,7 +4,7 @@
 	border-radius: 4px;
 	padding: 18px;
 	box-sizing: border-box;
-	margin: 0 .3em .3em .3em;
+	width: 100%;
 }
 
 .GoalTitle {
@@ -15,7 +15,7 @@
 	border: none;
 	padding: .1em;
 	box-sizing: border-box;
-	width: 80%;
+	width: 70%;
 }
 
 .Children {
@@ -26,7 +26,7 @@
 	padding: .2em;
 	box-sizing: border-box;
 	height: 1.5em;
-	width: 90%;
+	width: 70%;
 }
 
 .Children:focus {
@@ -68,4 +68,40 @@
 	width: 1.3em;
     height: 1.2em;
     outline: none;
+}
+
+.GoalLabelContainer {
+	background: #F0FFFF;
+	width: 100%;
+	border-radius: 4px;
+	height: auto;
+}
+
+.GoalLabelContainer > ul {
+	display: flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
+	padding: 6px;
+}
+
+.GoalLabelSelection {
+	margin: 4px;
+}
+
+.GoalLabelSelection > button{
+	color: #333;
+	border: none;
+	background: #98FB98;
+	font-size: 12px;
+	padding: 6px;
+	margin: 2px;
+	border-radius: 2px;
+}
+
+.GoalWrapper {
+	margin: 0 .3em 32px .3em;
+}
+
+.GoalLabelSelection>button:focus {
+	outline: 1px solid #333;
 }

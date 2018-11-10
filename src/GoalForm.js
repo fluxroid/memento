@@ -1,22 +1,42 @@
 import React, { Component } from 'react';
 import './css/GoalForm.css';
-
+import LabelSelection from './LabelSelection.js';
 
 class GoalForm extends Component {
 	constructor(props) {
+    const clickedLabels = {}
   	super(props);
     this.state = {
-    	tags:['Work','School',"Fitness"]
+    	visibleLabels: false,
+      clickedLabels: {}
     	};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 		this.handleDeleteStep = this.handleDeleteStep.bind(this);
+    this.handleVisibleLabel = this.handleVisibleLabel.bind(this);
+    this.toggleLabel = this.toggleLabel.bind(this);
 	}
 
 	handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit(); 
+    this.props.onFormSubmit('labels',this.state.clickedLabels); 
+    this.setState({
+      visibleLabels: false,
+      clickedLabels: {}
+      });
   	}
+
+  toggleLabel = (event) => {
+    const name = event.target.name;
+    const clickedLabels = this.state.clickedLabels;
+    if (name in this.state.clickedLabels) {
+      const value = !this.state.clickedLabels[name];
+      this.setState({clickedLabels: {...clickedLabels, ...{[name]: value}}});
+    }
+    else {
+      this.setState({clickedLabels: {...clickedLabels, ...{[name]: true}}});
+    }
+  }
 
   handleChange = (event) => {
     this.props.onFormChange(event.target);
@@ -24,6 +44,11 @@ class GoalForm extends Component {
 
   handleDeleteStep = (event) => {
   	this.props.onFormDelete(event.target);
+  }
+
+  handleVisibleLabel = (event) => {
+    const value = this.state.visibleLabels;
+    this.setState({visibleLabels : !value});
   }  
 
 	render() {
@@ -49,6 +74,7 @@ class GoalForm extends Component {
   	);
 
 		return (
+      <div className="GoalFormWithLabel">
 			<div className="GoalForm">
 			<form 
         onSubmit={this.handleSubmit} 
@@ -72,8 +98,23 @@ class GoalForm extends Component {
        	value="Submit"
        	className={"Submit"}
        	/>
+       <input type="button"
+        value="Label"
+        className={"GoalFormLabel"}
+        onClick={this.handleVisibleLabel}
+        />
       	</div>
       </form>
+      </div>
+      {this.state.visibleLabels ? 
+        <LabelSelection 
+          className={"LabelContainer"} 
+          output={this.props.labels.output}
+          toggle={this.toggleLabel}
+          selected={this.state.clickedLabels}
+        />
+        :
+        <div></div>}
       </div>
 		);
 	}
