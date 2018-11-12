@@ -25,7 +25,6 @@ class SideBar extends Component {
 						</li>
 			})
 		const visible = this.state.visible;
-		console.log(this.state.deleteVisible);
 		return (
 			<div className="SideBar">
 			<div className="SideBarSection">
@@ -39,7 +38,7 @@ class SideBar extends Component {
 				
 				<ul>
 					{labels}
-					{this.state.visible &&
+					{visible &&
 						<form 
 		       		onSubmit={(event)=> {
 		        	event.preventDefault(); 

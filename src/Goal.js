@@ -64,8 +64,8 @@ class Goal extends Component {
 				);	
 			})
 			return (
-			<div className="GoalWrapper">
-			<div key={id} className={"Goal"}>
+			<div key={id} className="GoalWrapper">
+			<div className={"Goal"}>
 				<div>
 					<input type="checkbox" 
 						name={goalIndex+",title"}
@@ -101,11 +101,12 @@ class Goal extends Component {
 				</div>
 				<div>{this.state.visible[goalIndex] && children}</div>
 			</div>
-			<div className={"GoalLabelContainer"} >
-					<ul>{shownLabels.map(label => 
-						<li className={"GoalLabelSelection"}><button>{label}</button></li>)}
+			{(shownLabels.length > 0) && <div className={"GoalLabelContainer"} >
+					<ul>{shownLabels.map((label, index) => 
+						<li key={index} className={"GoalLabelSelection"}><button>{label}</button></li>)}
 					</ul>
 			</div>
+			}
 			</div>
 			);
 				}

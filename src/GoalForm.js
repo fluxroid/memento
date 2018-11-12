@@ -4,7 +4,6 @@ import LabelSelection from './LabelSelection.js';
 
 class GoalForm extends Component {
 	constructor(props) {
-    const clickedLabels = {}
   	super(props);
     this.state = {
     	visibleLabels: false,
@@ -106,15 +105,14 @@ class GoalForm extends Component {
       	</div>
       </form>
       </div>
-      {this.state.visibleLabels ? 
+      {this.state.visibleLabels && 
         <LabelSelection 
           className={"LabelContainer"} 
           output={this.props.labels.output}
           toggle={this.toggleLabel}
           selected={this.state.clickedLabels}
         />
-        :
-        <div></div>}
+      }
       </div>
 		);
 	}

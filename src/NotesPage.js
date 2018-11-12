@@ -16,6 +16,7 @@ class NotesPage extends Component {
           onFormChange={this.props.change}
           onFormSubmit={this.props.submit}
           input={this.props.input}
+          labels={this.props.labels}
         />
         <Note
           texts={this.props.output}

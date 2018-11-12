@@ -1,6 +1,6 @@
 .NoteForm {
 	width: 30%;
-	margin: 35px auto;
+	margin: 10px auto 35px auto;
 	margin-bottom: 0px;
 	display: flex;
 	justify-content: center;
@@ -17,13 +17,47 @@
 
 }
 
-.NoteForm > input[type=submit] {
+.NoteForm > div {
+	display: flex;
+	flex-direction: row;
+	margin-top: 3px;
+}
+
+.NoteForm > div > input[type=submit],
+.NoteForm > div > input[type=button]  
+{
 	border-radius: 4px;
 	background: #D3D3D3;
 	padding: 10px;
 	border: none;
+	margin-left: .3em;
 }
 
-.NoteForm > input[type=submit]:hover {
+.NoteForm > div > input[type=submit]:hover,
+.NoteForm > div > input[type=button]:hover  
+ {
 	background: #C0C0C0;
+}
+
+.NoteFormWrapper {
+	display: flex;
+	flex-direction: column;
+	margin: 35px auto;
+}
+
+.LabelContainerNotes {
+	background: #F5FFFA;
+	width: 360px;
+	border-radius: 4px;
+	border: 2px solid #F5FFFA;
+	margin: 10px auto 35px auto;
+	height: auto;
+	padding: 10px;
+	margin-bottom: 0px;
+}
+
+.LabelContainerNotes > ul {
+	display: flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
 }

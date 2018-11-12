@@ -50,8 +50,10 @@ class Note extends Component {
 			{
 				texts.map((text, index) => 
 				{
+				const shownLabels = Object.keys(text.labels).filter(label => text.labels[label]);
 				return (
-					<div key={text.id} 
+					<div key={text.id} className={"NoteWrapper"}>
+					<div  
 						id={text.id}
 						className={'Note'}
 						onMouseEnter={this.handleMouseEnter}
@@ -111,6 +113,14 @@ class Note extends Component {
 								/>
 							</div>
 	  					</div>
+					</div>
+					{ (shownLabels.length > 0) &&
+					<div className={"NoteLabelContainer"} >
+					<ul>{shownLabels.map((label, index) => 
+						<li key={index} className={"NoteLabelSelection"}><button>{label}</button></li>)}
+					</ul>
+					</div>
+					}
 					</div>
 					)
 				})

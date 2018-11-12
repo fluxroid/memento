@@ -43,7 +43,7 @@ class App extends Component {
             <Route exact path="/" 
               render={() => <HomePage hideSide={this.hideSideBar}/>}/>
             <Route exact path="/notes" 
-              render={() => <NewNotesPage hideSide={this.hideSideBar}/>}/>
+              render={() => <NewNotesPage hideSide={this.hideSideBar} labels = {labelObject}/>}/>
             <Route exact path="/goals" 
               render={() => <NewGoalsPage hideSide={this.hideSideBar} labels = {labelObject}/>}/>
           </div>
