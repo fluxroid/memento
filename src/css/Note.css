@@ -24,7 +24,7 @@
 }
 
 .NoteContainer {
-	width: 70%;
+	max-width: 750px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
