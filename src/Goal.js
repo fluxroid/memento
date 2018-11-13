@@ -8,10 +8,8 @@ class Goal extends Component {
 		super(props);
 		this.state = {
 			visible: {},
-			checked: {}		
 		};
 		this.handleDrop = this.handleDrop.bind(this);
-		this.handleCheck = this.handleCheck.bind(this); 
 	}
 
 	handleDrop(event) {
@@ -21,36 +19,21 @@ class Goal extends Component {
 				visible: {...oldVisible, ...{[event.target.name]: !value }}
 		});
 	}
-	
-
-	handleCheck(event) {
-		const oldChecked = this.state.checked;
-		const [goalIndex, key] = event.target.name.split(',');
-		if (goalIndex in oldChecked){
-			const newValue = {[key]: !oldChecked[goalIndex][key]};
-			const newObj = {[goalIndex]: {...oldChecked[goalIndex], ...newValue}};
-			this.setState({
-				checked: {...oldChecked, ...newObj}
-			});
-		}
-		else {
-			const newObj = {[goalIndex]: {[key]: true}}
-			this.setState({
-				checked: {...oldChecked, ...newObj}
-			})
-		}
-	}
 
 	render () {
-		const checked = this.state.checked;
+		const checked = this.props.checked;
 		const goals = this.props.goals.map( (goal, goalIndex) => {
 			const {title, id, date, labels, ...steps} = goal;
+	
 			const shownLabels = Object.keys(labels).filter(label => labels[label]);
-			const children = Object.keys(steps).map(stepId => {
+			const children = Object.keys(steps).map( (stepId, stepIndex) => {
+
 				return (
 					<div key={stepId}>
 							<CheckBox
-								parent={goalIndex in checked && checked[goalIndex]['title']}
+								checked={goalIndex in checked && checked[goalIndex][stepId]}
+								onChange={(event) => this.props.onHandleCheck(event)}
+								name={goalIndex+","+stepId}
 							/>
 							<span className="Children">
 								<input type="text" 
@@ -67,10 +50,10 @@ class Goal extends Component {
 			<div key={id} className="GoalWrapper">
 			<div className={"Goal"}>
 				<div>
-					<input type="checkbox" 
+					<CheckBox 
+						checked={goalIndex in checked && checked[goalIndex]['title']}
 						name={goalIndex+",title"}
-						onChange={this.handleCheck}
-						className={"CheckBox"}
+						onChange={(event) => this.props.onHandleCheck(event)}
 					/>
 					<span>
 						<input type="text" 
@@ -84,7 +67,7 @@ class Goal extends Component {
 						<button
 							name={id}
 							type="text"
-							onClick={event => this.props.onGoalDelete(event.target)}
+							onClick={(event) => this.props.onGoalDelete(event.target)}
 						>
 							x
 						</button>
