@@ -24,11 +24,12 @@
 }
 
 .StepForm {
-	border: 2px solid #8C8C8C;
-	width: 80%;
-	font-size: 1.5em;
+	border: 1px solid #708090;
+	width: 85%;
+	font-size: 1.2em;
 	margin: 4px;
-	padding: 2px;
+	margin-right: 6px;
+	padding: 6px;
 }
 
 .DeleteStep, .AddStep, .Submit, .GoalFormLabel {

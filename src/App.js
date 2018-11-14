@@ -16,9 +16,9 @@ class App extends Component {
     this.hideSideBar = this.hideSideBar.bind(this);
   }
 
-  hideSideBar = (cond) => {
-    if (cond !== this.state.hideSide)   
-      this.setState({hideSide: cond});
+  hideSideBar = () => {
+    const value = this.state.hideSide;   
+    this.setState({hideSide: !value});
   }
 
   render() {
@@ -36,16 +36,17 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <NavBar />
+        <NavBar hideSide={this.hideSideBar} hideStatus={this.state.hideSide}/>
+
         <div className="Content">
           <div className="Filler"></div>
           <div>
             <Route exact path="/" 
-              render={() => <HomePage hideSide={this.hideSideBar}/>}/>
+              render={() => <HomePage />}/>
             <Route exact path="/notes" 
-              render={() => <NewNotesPage hideSide={this.hideSideBar} labels = {labelObject}/>}/>
+              render={() => <NewNotesPage labels = {labelObject}/>}/>
             <Route exact path="/goals" 
-              render={() => <NewGoalsPage hideSide={this.hideSideBar} labels = {labelObject}/>}/>
+              render={() => <NewGoalsPage labels = {labelObject}/>}/>
           </div>
           {this.state.hideSide ? <div className="Filler"></div> : NewSideBar}
         </div>

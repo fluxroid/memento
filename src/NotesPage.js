@@ -3,10 +3,9 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
 class NotesPage extends Component {
-  componentDidMount() {
-    this.props.hideSide(false);
-  }
-  
+  // componentWillUnmount() {
+  // } 
+
   render() {  
     return (
     	<div>

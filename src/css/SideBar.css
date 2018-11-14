@@ -1,0 +1,68 @@
+.LabelInput {
+	width: 70%;
+	border: none;
+	padding: 4px;
+	font-size: 14px;
+}
+
+.Label {
+	margin: .2em 0;
+}
+
+.LabelSubmit {
+	color: #333;
+	border: none;
+	background: #D3D3D3;
+	font-size: 14px;
+	padding: 4px;
+	margin: 2px;
+	border-radius: 2px;
+}
+
+.LabelSubmit:hover {
+	background: #C0C0C0;
+}
+
+.SideBarHeadings {
+	font-size: 22px;
+	font-weight: bold;
+
+}
+
+.SideBarSection {
+	margin: 0 0 2em 0;
+}
+
+.DeleteLabelButton:hover, 
+.SideBarButton:hover {
+	background: #5F9EA0;
+}
+
+.SideBar {
+	font-family: 'Roboto Condensed', sans-serif;
+	margin-left: auto;
+	background-color: #015249;
+	color: #FFFFFA;
+	text-align: left;
+	width: 10%;
+	padding: 1em 1.5em;
+	font-size: 16px;
+	min-width: 80px;
+	min-height: 88vh;
+}
+
+.SideBarButton {
+	background: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 18px;
+}
+
+.DeleteLabelButton {
+	background: none;
+	border: none;
+	border-radius: 12px;
+	font-size: 12px;
+	padding: 6px;
+	margin: 2px;
+}
