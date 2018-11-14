@@ -18,7 +18,7 @@
 	background: #F5FFFA;
 	margin-bottom: 5px;
 	width: 400px;
-	border-radius: 4px;
+	border-radius: 2px;
 	height: auto;
 	padding: 10px;
 }
@@ -38,7 +38,7 @@
 	font-size: 14px;
 	padding: 6px;
 	margin: 2px;
-	border-radius: 4px;
+	border-radius: 2px;
 }
 
 .DeleteStep:hover, .AddStep:hover, .Submit:hover, .GoalFormLabel:hover {
@@ -53,7 +53,7 @@
 .LabelContainer {
 	background: #F5FFFA;
 	width: 400px;
-	border-radius: 4px;
+	border-radius: 2px;
 	height: auto;
 	padding: 10px;
 }
@@ -75,13 +75,5 @@
 	font-size: 14px;
 	padding: 6px;
 	margin: 2px;
-	border-radius: 4px;
-}
-
-.LabelSelection>button:focus {
-	outline: 1px solid #333;
-}
-
-.LabelSelection > button:hover {
-	background: #E6E6FA;
+	border-radius: 2px;
 }

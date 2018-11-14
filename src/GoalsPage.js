@@ -29,58 +29,61 @@ class GoalsPage extends Component {
 
   componentDidUpdate(prevProps) {
     const Newoutput = this.props.output;
-    if (Newoutput !== prevProps.output){
+    if (Newoutput !== prevProps.output && Newoutput.length !== prevProps.output.length){
+      let result = {}
       const oldChecked = {...this.state.checked};
-      const newChecked = this.handleUpdateChecked();
       if (Newoutput.length > prevProps.output.length) {
-        this.setState({
-        checked: {...oldChecked, ...newChecked}
-        });
-      }
+        const newChecked = this.handleUpdateChecked();
+        result = {...oldChecked, ...newChecked};
+      } 
       else if (Newoutput.length < prevProps.output.length) {
+        const newChecked = this.handleUpdateChecked(true);
         Object.keys(oldChecked).forEach((key)=> {
           if (!(key in newChecked))
             delete oldChecked[key]
         });
-        this.setState({
-          checked: {...oldChecked}
-        })        
+        result = {...oldChecked}    
       }
-    localStorage.setItem("checked", JSON.stringify({...oldChecked, ...newChecked}));
+      this.setState({
+        checked: result
+        });
+
+      localStorage.setItem("checked", JSON.stringify(result));
     }
   }
 
   handleCheck(event) {
     const oldChecked = this.state.checked;
-    const [goalIndex, key] = event.target.name.split(',');
+    const [id, key] = event.target.name.split(',');
     let newObj = {};
-    //if (goalIndex in oldChecked) {
-      const newValue = !oldChecked[goalIndex][key]
+      const newValue = !oldChecked[id][key]
       if (key === "title") {  
-        const tempChecked = {...oldChecked[goalIndex], ...{[key]: newValue}};
+        const tempChecked = {...oldChecked[id], ...{[key]: newValue}};
         Object.keys(tempChecked).forEach(k => tempChecked[k] = newValue)
-        newObj = {[goalIndex]: tempChecked} 
+        newObj = {[id]: tempChecked} 
       }
       else {
-        newObj = {[goalIndex]: {...oldChecked[goalIndex], ...{[key]: newValue}}};
+        newObj = {[id]: {...oldChecked[id], ...{[key]: newValue}}};
       }
       this.setState({
         checked: {...oldChecked, ...newObj}
       });
-  localStorage.setItem("checked", JSON.stringify({...oldChecked, ...newObj}));
+    localStorage.setItem("checked", JSON.stringify({...oldChecked, ...newObj}));
   }
 
   handleDelete(target) {
     this.props.delete(target);
   }
 
-  handleUpdateChecked() {
+  handleUpdateChecked(deleted=false) {
     const checked = {};
-    this.props.output.forEach( (goal, goalIndex) => {
+    this.props.output.forEach( goal => {
       const {title, id, date, labels, ...steps} = goal;
       const temp2 = {}
-      Object.keys(steps).forEach( (step) => temp2[step] = false);
-      checked[goalIndex] = {...{title: false}, ...temp2}
+      if ((!(id in this.state.checked) || deleted)) {
+        Object.keys(steps).forEach( (step) => temp2[step] = false);
+        checked[id] = {...{title: false}, ...temp2}
+      }
     })
     const result = localStorage.getItem("checked") 
     if (!result) {

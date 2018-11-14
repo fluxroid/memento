@@ -1,6 +1,6 @@
 .Note {
 	background: #F5FFFA;
-	border-radius: 4px;
+	border-radius: 2px;
 	border: 2px solid #F5FFFA;
 	padding: 12px;
 	margin-bottom: 4px;
@@ -34,11 +34,12 @@
 }
 
 .NoteInputBody, textarea.NoteInputBody {
-	font-size: 1.2em;
+	font-size: 1.0em;
 }
 
 .NoteInputTitle {
-	font-size: 1.6em;
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 1.3em;
 	font-weight: bold;
 }
 
@@ -53,7 +54,7 @@
 
 .NoteLabelContainer {
 	background: #F0FFFF;
-	border-radius: 4px;
+	border-radius: 2px;
 	height: auto;
 	border: 2px solid #F5FFFA;
 	padding: 2px;
@@ -75,7 +76,7 @@
 	color: #333;
 	border: none;
 	background: #98FB98;
-	font-size: 12px;
+	font-size: .8em;
 	padding: 7px;
 	margin: 2px;
 	border-radius: 2px;
@@ -83,8 +84,4 @@
 
 .NoteWrapper {
 	margin: 0 .3em 32px .3em;
-}
-
-.NoteLabelSelection>button:focus {
-	outline: 1px solid #333;
 }

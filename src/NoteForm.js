@@ -24,7 +24,6 @@ class NoteForm extends Component {
       visibleLabels: false,
       clickedLabels: {}
       }); 
-    console.log("there");
   }
 
   handleVisibleLabel = (event) => {

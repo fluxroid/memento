@@ -31,9 +31,9 @@ class Goal extends Component {
 				return (
 					<div key={stepId}>
 							<CheckBox
-								checked={goalIndex in checked && checked[goalIndex][stepId]}
+								checked={id in checked && checked[id][stepId]}
 								onChange={(event) => this.props.onHandleCheck(event)}
-								name={goalIndex+","+stepId}
+								name={id+","+stepId}
 							/>
 							<span className="Children">
 								<input type="text" 
@@ -51,8 +51,8 @@ class Goal extends Component {
 			<div className={"Goal"}>
 				<div>
 					<CheckBox 
-						checked={goalIndex in checked && checked[goalIndex]['title']}
-						name={goalIndex+",title"}
+						checked={id in checked && checked[id]['title']}
+						name={id+",title"}
 						onChange={(event) => this.props.onHandleCheck(event)}
 					/>
 					<span>
