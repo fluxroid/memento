@@ -16,6 +16,16 @@ class GoalForm extends Component {
     this.toggleLabel = this.toggleLabel.bind(this);
 	}
 
+  componentDidMount() {
+      const labels = this.state;
+      this.setState(this.props.load("GoalFormLabels", labels));
+    }
+
+  componentWillUnmount() {
+      const labels = this.state;
+      this.props.save("GoalFormLabels", labels);
+    }
+
 	handleSubmit = (event) => {
     event.preventDefault();
     this.props.onFormSubmit('labels',this.state.clickedLabels); 

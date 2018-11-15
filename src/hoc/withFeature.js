@@ -13,6 +13,16 @@ function withFeature(WrappedComponent, feature, idName, input) {
 			};
 		}
 
+		componentDidMount() {
+			const input = this.state.input;
+			this.setState({ input: this.props.load(feature+"Input", input)});
+  	}
+
+		componentWillUnmount() {
+			const input = this.state.input;
+			this.props.save(feature+"Input", input);
+  	}
+
 		edit = (target, name) => {
 			const [index, key] = target.name.split(',');
     	const output = [...this.state.output];

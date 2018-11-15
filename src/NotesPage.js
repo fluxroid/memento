@@ -3,13 +3,12 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
 class NotesPage extends Component {
-  // componentWillUnmount() {
-  // } 
 
   render() {  
     return (
     	<div>
         <NoteForm
+          {...this.props}
           head={'Title'} 
           body={'Content'} 
           onFormChange={this.props.change}

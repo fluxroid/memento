@@ -32,11 +32,11 @@ class App extends Component {
         change: this.props.change
     };
     const NewSideBar = <SideBar labels = {labelObject}/>;
-    
+    const hideSide = this.state.hideSide;
     return (
       <Router>
       <div className="App">
-        <NavBar hideSide={this.hideSideBar} hideStatus={this.state.hideSide}/>
+        <NavBar hideSide={this.hideSideBar} hideStatus={hideSide}/>
 
         <div className="Content">
           <div className="Filler"></div>
@@ -44,9 +44,9 @@ class App extends Component {
             <Route exact path="/" 
               render={() => <HomePage />}/>
             <Route exact path="/notes" 
-              render={() => <NewNotesPage labels = {labelObject}/>}/>
+              render={() => <NewNotesPage labels = {labelObject} hideStatus={hideSide}/>}/>
             <Route exact path="/goals" 
-              render={() => <NewGoalsPage labels = {labelObject}/>}/>
+              render={() => <NewGoalsPage labels = {labelObject} hideStatus={hideSide}/>}/>
           </div>
           {this.state.hideSide ? <div className="Filler"></div> : NewSideBar}
         </div>

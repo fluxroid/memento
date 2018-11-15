@@ -17,6 +17,16 @@ class NoteForm extends Component {
     this.toggleLabel = this.toggleLabel.bind(this);
   }
 
+  componentDidMount() {
+      const labels = this.state;
+      this.setState(this.props.load("NoteFormLabels", labels));
+    }
+
+    componentWillUnmount() {
+      const labels = this.state;
+      this.props.save("NoteFormLabels", labels);
+    }
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.onFormSubmit('labels',this.state.clickedLabels);

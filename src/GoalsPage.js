@@ -20,6 +20,16 @@ class GoalsPage extends Component {
     this.incrementStep = this.incrementStep.bind(this);
 	}
 
+  componentDidMount() {
+      const stepId = this.state.stepId;
+      this.setState({stepId:this.props.load("stepId", stepId)});
+    }
+
+  componentWillUnmount() {
+      const stepId = this.state.stepId;
+      this.props.save("stepId", stepId);
+    }
+
 	handleFormSubmit = (key='', object={}) => {
     this.setState({
       stepId: 0
@@ -111,6 +121,7 @@ class GoalsPage extends Component {
 		return (
 			<div className={"GoalPage"}>
 			<GoalForm
+        {...this.props}
         labels = {this.props.labels}
         onFormChange={this.props.change}
         onFormSubmit={this.handleFormSubmit}
