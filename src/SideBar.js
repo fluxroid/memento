@@ -19,7 +19,14 @@ class SideBar extends Component {
 						<button
 							className={"DeleteLabelButton"}
 							name={value.id}
-							onClick={(event) => this.props.labels.delete(event.target)}
+							onClick={event => {
+								if (window.confirm("Deleting this will remove this from Notes and Goals"))
+								{
+									this.props.removeLabel(value.label);
+									this.props.labels.delete(event.target);
+								}
+							}
+						}
 						>
 							X
 						</button>
@@ -58,7 +65,7 @@ class SideBar extends Component {
 		          className={"LabelInput"}
 		          autoFocus={true}
 		        />
-		       	
+		       	<div>
 		       	<input type="submit"
 		       		name="submit" 
 		       		value="Ok"
@@ -68,9 +75,10 @@ class SideBar extends Component {
 		       <input type="button"
 		       	name="cancel" 
 		       	value="Cancel"
-		       	className={"LabelSubmit"}
+		       	className={"LabelCancel"}
 		       	onClick={() => this.setState({visible: false})}
 		       	/>
+		       	</div>
 	      	</form>
 					}
 				</ul>

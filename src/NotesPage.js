@@ -3,7 +3,6 @@ import Note from './Note.js';
 import NoteForm from './NoteForm.js';
 
 class NotesPage extends Component {
-
   render() {  
     return (
     	<div>

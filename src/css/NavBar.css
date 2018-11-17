@@ -1,0 +1,29 @@
+.SearchForm {
+	margin: 6px auto;
+	display: flex;
+	direction: row;
+}
+
+.SearchInput {
+	width: 30vw;
+	background: #F5FFFA;
+	font-size: 14px;
+	padding: 6px;
+	border-radius: 2px;
+	border: none;
+}
+
+.SearchInput:focus {
+	background: #FFFFFF;
+	outline: none;
+}
+
+.SearchSubmit {
+	background: #F5FFFA;
+	border-radius: 2px;
+	border: none;
+}
+
+.SearchSubmit:hover {
+	background: #D3D3D3;
+}

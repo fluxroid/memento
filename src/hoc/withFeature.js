@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-function withFeature(WrappedComponent, feature, idName, input) {
+function withFeature(WrappedComponent, feature, idName, input, deletedLabel) {
 	return class extends Component {
 		constructor(props) {
 			super(props);
@@ -16,6 +16,15 @@ function withFeature(WrappedComponent, feature, idName, input) {
 		componentDidMount() {
 			const input = this.state.input;
 			this.setState({ input: this.props.load(feature+"Input", input)});
+			if (this.state.output.some(
+				portion=> {
+					return ('labels' in portion) && (deletedLabel in portion['labels'])
+						}
+					)
+				) 
+			{
+				this.edit('labels', deletedLabel, true);
+			}
   	}
 
 		componentWillUnmount() {
@@ -23,13 +32,20 @@ function withFeature(WrappedComponent, feature, idName, input) {
 			this.props.save(feature+"Input", input);
   	}
 
-		edit = (target, name) => {
-			const [index, key] = target.name.split(',');
+		edit = (target, name, all=false) => {
     	const output = [...this.state.output];
-    	output[index][key] = target.value;   
-    	this.setState({
-      	output: output
-    	});
+			if (all) {
+				output.forEach(portion => {
+					delete portion[target][name]
+				})
+			}
+			else {
+				const [index, key] = target.name.split(',');
+    		output[index][key] = target.value;   
+    	}
+  		this.setState({
+    		output: output
+  		});
     	this.props.save(feature, output);
 		}
 
@@ -93,6 +109,7 @@ function withFeature(WrappedComponent, feature, idName, input) {
 					output={this.state.output}
 					input={this.state.input}
 					undo={this.undo}
+					modify={this.modify}
 					{...this.props}
 					/>
 				);

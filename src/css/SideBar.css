@@ -1,25 +1,31 @@
 .LabelInput {
 	width: 70%;
-	border: none;
-	padding: 4px;
-	font-size: 14px;
+	outline: 0;
+	border: 0;
+	background: transparent;
+	border-bottom: 1px solid black;
+	padding: 2px;
+	font-size: 16px;
+	color: white;
 }
 
 .Label {
 	margin: .2em 0;
 }
 
-.LabelSubmit {
+.LabelSubmit, .LabelCancel {
 	color: #333;
 	border: none;
 	background: #D3D3D3;
-	font-size: 14px;
-	padding: 4px;
-	margin: 2px;
+	font-size: 12px;
+	padding: 6px;
+	margin-top: 4px;
+	margin-right: 4px;
 	border-radius: 2px;
 }
 
-.LabelSubmit:hover {
+.LabelSubmit:hover, 
+.LabelCancel:hover {
 	background: #C0C0C0;
 }
 
