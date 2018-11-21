@@ -6,10 +6,14 @@ import CheckBox from './CheckBox.js'
 class Goal extends Component {
 	constructor(props) {
 		super(props);
+		const result = localStorage.getItem("checked")
 		this.state = {
 			visible: {},
+			checked: result? JSON.parse(result) : this.handleUpdateChecked()
+
 		};
 		this.handleDrop = this.handleDrop.bind(this);
+		this.handleCheck = this.handleCheck.bind(this); 
 	}
 
 	handleDrop(event) {
@@ -20,9 +24,70 @@ class Goal extends Component {
 		});
 	}
 
+	handleUpdateChecked(deleted=false) {
+    const checked = {};
+    this.props.output.forEach( goal => {
+      const {title, id, date, labels, ...steps} = goal;
+      const temp2 = {}
+      if ((!(id in this.state.checked) || deleted)) {
+        Object.keys(steps).forEach( (step) => temp2[step] = false);
+        checked[id] = {...{title: false}, ...temp2}
+      }
+    })
+    const result = localStorage.getItem("checked") 
+    if (!result) {
+      localStorage.setItem("checked", JSON.stringify(checked))
+    } 
+    return checked;
+  }
+
+	componentDidUpdate(prevProps) {
+    const Newoutput = this.props.output;
+    if (Newoutput !== prevProps.output && Newoutput.length !== prevProps.output.length){
+      let result = {}
+      const oldChecked = {...this.state.checked};
+      if (Newoutput.length > prevProps.output.length) {
+        const newChecked = this.handleUpdateChecked();
+        result = {...oldChecked, ...newChecked};
+      } 
+      else if (Newoutput.length < prevProps.output.length) {
+        const newChecked = this.handleUpdateChecked(true);
+        Object.keys(oldChecked).forEach((key)=> {
+          if (!(key in newChecked))
+            delete oldChecked[key]
+        });
+        result = {...oldChecked}    
+      }
+      this.setState({
+        checked: result
+        });
+
+      localStorage.setItem("checked", JSON.stringify(result));
+    }
+  }
+
+  handleCheck(event) {
+    const oldChecked = this.state.checked;
+    const [id, key] = event.target.name.split(',');
+    let newObj = {};
+      const newValue = !oldChecked[id][key]
+      if (key === "title") {  
+        const tempChecked = {...oldChecked[id], ...{[key]: newValue}};
+        Object.keys(tempChecked).forEach(k => tempChecked[k] = newValue)
+        newObj = {[id]: tempChecked} 
+      }
+      else {
+        newObj = {[id]: {...oldChecked[id], ...{[key]: newValue}}};
+      }
+      this.setState({
+        checked: {...oldChecked, ...newObj}
+      });
+    localStorage.setItem("checked", JSON.stringify({...oldChecked, ...newObj}));
+  }
+
 	render () {
-		const checked = this.props.checked;
-		const goals = this.props.goals.map( (goal, goalIndex) => {
+		const checked = this.state.checked;
+		const goals = this.props.output.map( (goal, goalIndex) => {
 			const {title, id, date, labels, ...steps} = goal;
 	
 			const shownLabels = Object.keys(labels).filter(label => labels[label]);
@@ -32,14 +97,14 @@ class Goal extends Component {
 					<div key={stepId}>
 							<CheckBox
 								checked={id in checked && checked[id][stepId]}
-								onChange={(event) => this.props.onHandleCheck(event)}
+								onChange={(event) => this.handleCheck(event)}
 								name={id+","+stepId}
 							/>
 							<span className="Children">
 								<input type="text" 
           				value={goal[stepId]}
           				name={goalIndex+","+stepId} 
-          				onChange={event => this.props.onGoalEdit(event.target)}
+          				onChange={event => this.props.edit(event.target)}
           				className={"Children"}
         				/>
 							</span>
@@ -53,13 +118,13 @@ class Goal extends Component {
 					<CheckBox 
 						checked={id in checked && checked[id]['title']}
 						name={id+",title"}
-						onChange={(event) => this.props.onHandleCheck(event)}
+						onChange={(event) => this.handleCheck(event)}
 					/>
 					<span>
 						<input type="text" 
           		value={title} 
           		name={goalIndex+",title"}
-          		onChange={event => this.props.onGoalEdit(event.target)}
+          		onChange={event => this.props.edit(event.target)}
           		className={"GoalTitle"}
         		/>
 					</span>
@@ -67,7 +132,7 @@ class Goal extends Component {
 						<button
 							name={id}
 							type="text"
-							onClick={(event) => this.props.onGoalDelete(event.target)}
+							onClick={(event) => this.props.delete(event.target)}
 						>
 							x
 						</button>

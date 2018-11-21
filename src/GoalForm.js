@@ -7,28 +7,39 @@ class GoalForm extends Component {
   	super(props);
     this.state = {
     	visibleLabels: false,
-      clickedLabels: {}
+      clickedLabels: {},
+      stepId: 0
+
     	};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
 		this.handleDeleteStep = this.handleDeleteStep.bind(this);
     this.handleVisibleLabel = this.handleVisibleLabel.bind(this);
     this.toggleLabel = this.toggleLabel.bind(this);
+    this.incrementStep = this.incrementStep.bind(this);
+
 	}
 
   componentDidMount() {
-      const labels = this.state;
-      this.setState(this.props.load("GoalFormLabels", labels));
+      const {visibleLabels, clickedLabels} = this.state;
+      const labels = {visibleLabels, clickedLabels};
+      this.setState({...this.props.load("GoalFormLabels", labels), stepId: 0});
     }
 
   componentWillUnmount() {
-      const labels = this.state;
-      this.props.save("GoalFormLabels", labels);
+      const {visibleLabels, clickedLabels} = this.state;
+      this.props.save("GoalFormLabels", {visibleLabels, clickedLabels});
     }
+
+  incrementStep = () => {
+    this.setState((state) => ({
+      stepId: state.stepId + 1,
+    }));
+    this.props.change({name: this.state.stepId, value: ""})
+  }
 
 	handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit('labels',this.state.clickedLabels); 
+    this.props.submit('labels',this.state.clickedLabels); 
     this.setState({
       visibleLabels: false,
       clickedLabels: {}
@@ -47,12 +58,12 @@ class GoalForm extends Component {
     }
   }
 
-  handleChange = (event) => {
-    this.props.onFormChange(event.target);
-  	}
-
   handleDeleteStep = (event) => {
-  	this.props.onFormDelete(event.target);
+    const id = parseInt(event.target.name, 10);
+    const {title, ...steps} = this.props.input;
+    const newSteps = {...steps}
+    delete newSteps[id];
+    this.props.change({title, ...newSteps}, true);
   }
 
   handleVisibleLabel = (event) => {
@@ -68,7 +79,7 @@ class GoalForm extends Component {
 			> 
 	  		<input type="text" 
 	  			value={this.props.input[id]} 
-	  			onChange={this.handleChange}
+	  			onChange={event => {this.props.change(event.target); }}
 	  			name={id}
 	  			id={id}
 	  			className={"StepForm"}
@@ -91,14 +102,14 @@ class GoalForm extends Component {
       >
         <input type="text" 
           value={title} 
-          onChange={this.handleChange}
+          onChange={event => {this.props.change(event.target); }}
           name="title" 
           className={"Title"}
-          placeholder={"Title"}
+          placeholder={this.props.title}
         />
         <input type="button" 
         	value="Add Step" 
-        	onClick={this.props.onIncrementStep}
+        	onClick={this.incrementStep}
         	className={"AddStep"}
         	/>
         {children}

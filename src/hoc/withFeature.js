@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-function withFeature(WrappedComponent, feature, idName, input, deletedLabel) {
+function withFeature(WrappedComponent, feature, idName, input, deletedLabel, filterFunction) {
 	return class extends Component {
 		constructor(props) {
 			super(props);
@@ -106,10 +106,9 @@ function withFeature(WrappedComponent, feature, idName, input, deletedLabel) {
 					deleted={this.state.deleted}
 					delete={this.delete}
 					submit={this.submit}
-					output={this.state.output}
+					output={filterFunction? filterFunction(this.state.output) : this.state.output}
 					input={this.state.input}
 					undo={this.undo}
-					modify={this.modify}
 					{...this.props}
 					/>
 				);

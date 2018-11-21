@@ -17,11 +17,11 @@ class Note extends Component {
   }
 
   	handleEdit = (event) => {
-  		this.props.onNoteEdit(event.target)
+  		this.props.edit(event.target)
   	}
 
   	handleDelete = (event) => {
-  		this.props.onNoteDelete(event.target)
+  		this.props.delete(event.target)
   		this.setState({editable: false});
   	}
 
@@ -40,7 +40,7 @@ class Note extends Component {
 	}
 
   	render() {
-  		const texts = this.props.texts;
+  		const texts = this.props.output;
   		const editable = this.state.editable;
   		const id = parseInt(this.state.id, 10);
 
@@ -108,7 +108,7 @@ class Note extends Component {
 	  						<div>
 								<Timer
 								id={text.id}
-								onNoteDelete={this.props.onNoteDelete}
+								onNoteDelete={this.props.delete}
 								time={text.date} 
 								/>
 							</div>

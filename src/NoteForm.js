@@ -12,7 +12,6 @@ class NoteForm extends Component {
 
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleVisibleLabel = this.handleVisibleLabel.bind(this);
     this.toggleLabel = this.toggleLabel.bind(this);
   }
@@ -29,7 +28,7 @@ class NoteForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onFormSubmit('labels',this.state.clickedLabels);
+    this.props.submit('labels',this.state.clickedLabels);
     this.setState({
       visibleLabels: false,
       clickedLabels: {}
@@ -40,10 +39,6 @@ class NoteForm extends Component {
     const value = this.state.visibleLabels;
     this.setState({visibleLabels : !value});
   }  
-
-  handleChange = (event) => {
-    this.props.onFormChange(event.target);
-  }
 
   toggleLabel = (event) => {
     const name = event.target.name;
@@ -76,14 +71,14 @@ class NoteForm extends Component {
           <input type="text" 
             placeholder={this.props.head} 
             value={this.props.input.title} 
-            onChange={this.handleChange}
+            onChange={event => { this.props.change(event.target);}}
             name="title"
           />       
 
           <input type="text" 
             placeholder={this.props.body} 
             value={this.props.input.body} 
-            onChange={this.handleChange}
+            onChange={event => { this.props.change(event.target);}}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             name="body" 

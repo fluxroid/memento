@@ -10,15 +10,9 @@ class NotesPage extends Component {
           {...this.props}
           head={'Title'} 
           body={'Content'} 
-          onFormChange={this.props.change}
-          onFormSubmit={this.props.submit}
-          input={this.props.input}
-          labels={this.props.labels}
         />
         <Note
-          texts={this.props.output}
-          onNoteEdit={this.props.edit}
-          onNoteDelete={this.props.delete}
+          {...this.props}
         />
         <div>
         {

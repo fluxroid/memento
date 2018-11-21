@@ -5,6 +5,7 @@ import withStorage from './hoc/withStorage.js'
 import GoalsPage from './GoalsPage.js';
 import HomePage from './HomePage.js';
 import NotesPage from './NotesPage.js';
+import ResultsPage from './ResultsPage.js';
 import NavBar from './NavBar.js'
 import SideBar from './SideBar.js'    
 import './css/App.css';
@@ -42,6 +43,7 @@ class App extends Component {
         delete: this.props.delete, 
         change: this.props.change
     };
+    const NewResultsPage = withStorage(ResultsPage);
     const NewSideBar = <SideBar labels = {labelObject} removeLabel = {this.removeLabel}/>;
     const hideSide = this.state.hideSide;
 
@@ -70,6 +72,16 @@ class App extends Component {
                 hideStatus={hideSide}
                 />
               }
+            />
+            <Route path="/results/:keys"
+              render={(props) => <NewResultsPage {...props} 
+              labels= {labelObject}
+              notes={this.props.load("output", [])}
+              goals={this.props.load("goals", [])}
+              deletedLabel = {deletedLabel} 
+              hideStatus={hideSide}
+              />
+            }
             />
           </div>
           {this.state.hideSide ? <div className="Filler2"></div> : NewSideBar}

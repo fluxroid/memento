@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/SideBar.css'
+import {Link} from "react-router-dom";
 
 class SideBar extends Component {
 	constructor(props) {
@@ -12,10 +13,11 @@ class SideBar extends Component {
 
 	render() {
 		const labels = this.props.labels.output.map(value => {
+			const path = "/results/labels="+value.label;
 			return <li key={value.id}
 							className={"Label"}
-							>								
-								{value.label}
+							>							
+							<Link to={path}>{value.label}</Link>	
 						<button
 							className={"DeleteLabelButton"}
 							name={value.id}
