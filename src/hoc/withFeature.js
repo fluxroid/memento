@@ -35,14 +35,17 @@ function withFeature(WrappedComponent, feature, idName, input, deletedLabel, fil
 		edit = (target, name, all=false) => {
     	const output = [...this.state.output];
 			if (all) {
-				output.forEach(portion => {
-					delete portion[target][name]
-				})
+				for (var item of output) {
+					delete item[target][name];
+				}
 			}
 			else {
-				const [index, key] = target.name.split(',');
-    		output[index][key] = target.value;   
-    	}
+				const [id, key] = target.name.split(',');
+				for (var item2 of output) {
+					if (String(item2.id) === id) 
+						item2[key] = target.value;
+				};   
+			}
   		this.setState({
     		output: output
   		});

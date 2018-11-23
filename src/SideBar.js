@@ -85,12 +85,12 @@ class SideBar extends Component {
 					}
 				</ul>
 			</div>
-			<div className="SideBarSection">
-				<div className="SideBarHeadings">Dates</div>
-			</div>
 			</div>
 			)
 	}
 }
 
+//<div className="SideBarSection">
+	//			<div className="SideBarHeadings">Dates</div>
+		//	</div>
 export default SideBar;

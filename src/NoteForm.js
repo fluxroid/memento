@@ -55,7 +55,8 @@ class NoteForm extends Component {
   render() {
     return (
       <div className="NoteFormWrapper">
-       {this.state.visibleLabels && <LabelSelection 
+       {this.state.visibleLabels && this.props.labels.output.length > 0 
+        && <LabelSelection 
           className={"LabelContainerNotes"} 
           output={this.props.labels.output}
           toggle={this.toggleLabel}

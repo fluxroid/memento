@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     const deletedLabel = this.state.deletedLabel;
     const NewNotesPage = withStorage(
-      withFeature(NotesPage, "output", "id", {title: '', body: ''}, deletedLabel));
+      withFeature(NotesPage, "notes", "noteId", {title: '', body: ''}, deletedLabel));
     const NewGoalsPage = withStorage(
       withFeature(GoalsPage, "goals", "goalId", {title: ''}, deletedLabel));
     const labelObject = {
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
-        <NavBar hideSide={this.hideSideBar} hideStatus={hideSide}/>
+        <NavBar hideSide={this.hideSideBar} hideStatus={hideSide} deletedLabel={deletedLabel}/>
 
         <div className="Content">
           <div className="Filler"></div>
@@ -76,7 +76,7 @@ class App extends Component {
             <Route path="/results/:keys"
               render={(props) => <NewResultsPage {...props} 
               labels= {labelObject}
-              notes={this.props.load("output", [])}
+              notes={this.props.load("notes", [])}
               goals={this.props.load("goals", [])}
               deletedLabel = {deletedLabel} 
               hideStatus={hideSide}

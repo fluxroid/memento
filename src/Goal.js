@@ -87,11 +87,11 @@ class Goal extends Component {
 
 	render () {
 		const checked = this.state.checked;
-		const goals = this.props.output.map( (goal, goalIndex) => {
+		const goals = this.props.output.map( goal => {
 			const {title, id, date, labels, ...steps} = goal;
 	
 			const shownLabels = Object.keys(labels).filter(label => labels[label]);
-			const children = Object.keys(steps).map( (stepId, stepIndex) => {
+			const children = Object.keys(steps).map( stepId => {
 
 				return (
 					<div key={stepId}>
@@ -103,7 +103,7 @@ class Goal extends Component {
 							<span className="Children">
 								<input type="text" 
           				value={goal[stepId]}
-          				name={goalIndex+","+stepId} 
+          				name={[id,stepId]} 
           				onChange={event => this.props.edit(event.target)}
           				className={"Children"}
         				/>
@@ -123,7 +123,7 @@ class Goal extends Component {
 					<span>
 						<input type="text" 
           		value={title} 
-          		name={goalIndex+",title"}
+          		name={[id,"title"]}
           		onChange={event => this.props.edit(event.target)}
           		className={"GoalTitle"}
         		/>
@@ -139,15 +139,15 @@ class Goal extends Component {
 					</span>
 					<span className={"DropDown"}>
 						<button
-							name={goalIndex} 
+							name={id} 
 							type="text"
 							onClick={this.handleDrop}
 						>
-							{this.state.visible[goalIndex] ? "-" : "+" }
+							{this.state.visible[id] ? "-" : "+" }
 						</button>
 					</span>
 				</div>
-				<div>{this.state.visible[goalIndex] && children}</div>
+				<div>{this.state.visible[id] && children}</div>
 			</div>
 			{(shownLabels.length > 0) && <div className={"GoalLabelContainer"} >
 					<ul>{shownLabels.map((label, index) => 

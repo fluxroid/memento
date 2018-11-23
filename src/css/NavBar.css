@@ -9,7 +9,7 @@
 	background: #F5FFFA;
 	font-size: 14px;
 	padding: 6px;
-	border-radius: 2px;
+	border-radius: 2px 0 0 2px;
 	border: none;
 }
 
@@ -18,12 +18,13 @@
 	outline: none;
 }
 
-.SearchSubmit {
+.SearchButton {
 	background: #F5FFFA;
-	border-radius: 2px;
+	border-radius: 0 2px 2px 0;
+	padding: 8px;
 	border: none;
 }
 
-.SearchSubmit:hover {
+.SearchButton:hover {
 	background: #D3D3D3;
 }

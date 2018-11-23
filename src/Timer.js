@@ -46,7 +46,7 @@ class Timer extends Component {
 	}
 
 	timerOver = () => {
-		this.props.onNoteDelete(this.props.id, true);
+		this.props.onNoteDelete({'name':this.props.id}, true);
 	}
 
 	tick() {

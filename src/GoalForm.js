@@ -22,19 +22,21 @@ class GoalForm extends Component {
   componentDidMount() {
       const {visibleLabels, clickedLabels} = this.state;
       const labels = {visibleLabels, clickedLabels};
-      this.setState({...this.props.load("GoalFormLabels", labels), stepId: 0});
+      this.setState({...this.props.load("GoalFormLabels", labels), 
+        stepId: this.props.load("stepId", 0)});
     }
 
   componentWillUnmount() {
-      const {visibleLabels, clickedLabels} = this.state;
+      const {visibleLabels, clickedLabels, stepId} = this.state;
       this.props.save("GoalFormLabels", {visibleLabels, clickedLabels});
+      this.props.save("stepId", stepId);
     }
 
   incrementStep = () => {
     this.setState((state) => ({
       stepId: state.stepId + 1,
     }));
-    this.props.change({name: this.state.stepId, value: ""})
+    this.props.change({name: "step"+String(this.state.stepId), value: ""})
   }
 
 	handleSubmit = (event) => {
@@ -59,7 +61,7 @@ class GoalForm extends Component {
   }
 
   handleDeleteStep = (event) => {
-    const id = parseInt(event.target.name, 10);
+    const id = event.target.name;
     const {title, ...steps} = this.props.input;
     const newSteps = {...steps}
     delete newSteps[id];
@@ -83,6 +85,7 @@ class GoalForm extends Component {
 	  			name={id}
 	  			id={id}
 	  			className={"StepForm"}
+          autoComplete={"off"}
 	  		/>
 	  		<input type="button"
 	  			value="x" 
@@ -126,7 +129,7 @@ class GoalForm extends Component {
       	</div>
       </form>
       </div>
-      {this.state.visibleLabels && 
+      {this.state.visibleLabels && this.props.labels.output.length > 0 &&
         <LabelSelection 
           className={"LabelContainer"} 
           output={this.props.labels.output}
